@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../../data";
 import Product from "./Product";
 
-const Products = () => {
+const Products = ({ cat, filters, sort }) => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   return (
     <Container>
       {popularProducts.map((product) => {
