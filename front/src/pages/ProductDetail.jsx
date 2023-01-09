@@ -10,7 +10,7 @@ import Newsletter from "../components/product/Newsletter";
 import Footer from "../components/home/Footer";
 import { useLocation } from "react-router-dom";
 
-const Product = () => {
+const ProductDetail = () => {
   const location = useLocation();
   const product_id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
@@ -34,9 +34,9 @@ const Product = () => {
 
   const handleQuantity = (type) => {
     if (type === "dec") {
-      quantity > 1 && setQuantity(quantity - 1);
+      quantity > 1 && setQuantity((prevQuantity) => prevQuantity - 1);
     } else {
-      setQuantity(quantity + 1);
+      setQuantity((prevQuantity) => prevQuantity + 1);
     }
   };
 
@@ -87,7 +87,7 @@ const Product = () => {
                 onClick={() => handleQuantity("inc")}
               />
             </AmountContainer>
-            <Button onClick={handleCllick}>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
@@ -97,7 +97,7 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductDetail;
 
 const Container = styled.div``;
 const Wrapper = styled.div`
