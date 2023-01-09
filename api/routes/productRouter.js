@@ -40,9 +40,10 @@ productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 // get product
-productRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+productRouter.get("/find/:id", async (req, res) => {
   try {
     const getProduct = await productService.getProduct(req.params.id);
+    console.log("getProduct:", getProduct);
     res.status(201).json(getProduct);
   } catch (err) {
     res.status(500).json(err);

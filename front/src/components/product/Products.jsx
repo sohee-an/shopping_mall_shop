@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import Product from "./Product";
+import Product from "../../pages/Product";
 export const SortType = {
   SORT: "newest",
   ASC: "asc",

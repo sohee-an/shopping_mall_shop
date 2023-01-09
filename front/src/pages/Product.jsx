@@ -1,58 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Remove, Add } from "@mui/icons-material";
 import { moblie } from "../responsive";
+import productApi from "../api/productApi";
 
 import Navbar from "../components/home/Navbar";
 import Announcement from "../components/home/Announcement";
 import Newsletter from "../components/product/Newsletter";
 import Footer from "../components/home/Footer";
+import { useLocation } from "react-router-dom";
 
 const Product = () => {
+  const location = useLocation();
+  const product_id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+  console.log(color, size);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await productApi.getPrdouctApi(product_id);
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProduct();
+  }, [product_id]);
+  console.log(product);
+
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  /* update Cart */
+  const handleClick = () => {};
+
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image
-            src={
-              "https://img.freepik.com/premium-psd/minimalist-polo-shirt-design-mockup_23-2149330765.jpg?w=1060"
-            }
-          />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Light Hat</Title>
-          <Desc>
-            착용감이 매우 가볍고 돌아오는 초봄에 쓰기 좋습니다. 색깔은 조명에
-            따라 조금은 달라질 수 있습니다.
-          </Desc>
-          <Price>7.87$</Price>
+          <Title> {product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>{product.price}원</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+              {product.color?.map((color) => (
+                <FilterColor
+                  key={color}
+                  color={color}
+                  onClick={() => setColor(color)}
+                />
+              ))}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
+                {product.size?.map((size) => (
+                  <FilterSizeOption key={size}>{size}</FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove
+                style={{ cursor: "pointer" }}
+                onClick={() => handleQuantity("dec")}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                style={{ cursor: "pointer" }}
+                onClick={() => handleQuantity("inc")}
+              />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleCllick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
@@ -128,7 +163,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 65%;
+  width: 50%;
   ${moblie({ width: "100%" })}
 `;
 const AmountContainer = styled.div`
