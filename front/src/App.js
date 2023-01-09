@@ -16,6 +16,7 @@ import Cart from "./pages/Cart";
 import ErrorPage from "./pages/ErrorPage";
 function App() {
   const user = true;
+  //유저가
   return (
     <>
       <BrowserRouter>
