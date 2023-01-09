@@ -50,7 +50,7 @@ productRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 // get all product // category별
-productRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
+productRouter.get("/", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
   console.log(qCategory);

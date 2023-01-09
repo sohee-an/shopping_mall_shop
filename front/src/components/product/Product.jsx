@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Search, FavoriteBorder } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
   return (
@@ -12,7 +13,9 @@ const Product = ({ product }) => {
           <ShoppingCart />
         </Icon>
         <Icon>
-          <Search />
+          <Link to={`/product/${product._id}`}>
+            <Search />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorder />

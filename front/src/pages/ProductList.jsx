@@ -8,12 +8,17 @@ import Announcement from "../components/home/Announcement";
 import Products from "../components/product/Products";
 import Newsletter from "../components/product/Newsletter";
 import Footer from "../components/home/Footer";
+export const SortType = {
+  SORT: "newest",
+  ASC: "asc",
+  DESC: "desc",
+};
 
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
   const [filters, setFilters] = useState(null);
-  const [sort, setSort] = useState("Newest");
+  const [sort, setSort] = useState(SortType.SORT);
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -21,27 +26,28 @@ const ProductList = () => {
       ...filters,
       [e.target.name]: value,
     });
-    console.log(filters);
   };
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dresses</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="color" onChange={handleFilters}>
             <Option disabled>color</Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
+
+            <Option>white</Option>
+            <Option>black</Option>
+            <Option>red</Option>
+            <Option>blue</Option>
+            <Option>yellow</Option>
+            <Option>green</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled>size</Option>
+
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>
@@ -52,9 +58,9 @@ const ProductList = () => {
         <Filter>
           <FilterText>Sort filter2</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value={"newset"}>Newest</Option>
-            <Option value={"asc"}>Price(asc)</Option>
-            <Option value={"desc"}>Price(desc)</Option>
+            <Option value={SortType.SORT}>Newest</Option>
+            <Option value={SortType.ASC}>Price(asc)</Option>
+            <Option value={SortType.DESC}>Price(desc)</Option>
           </Select>
         </Filter>
       </FilterContainer>
