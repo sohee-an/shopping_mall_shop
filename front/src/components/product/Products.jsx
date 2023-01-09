@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import Product from "../../pages/Product";
+import Product from "./product";
 export const SortType = {
   SORT: "newest",
   ASC: "asc",
@@ -12,6 +12,7 @@ export const SortType = {
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const filterContent = <p>찾으시는 제품이 없습니다.</p>;
   console.log("filters:", filters);
   useEffect(() => {
     const getProducts = async () => {
@@ -59,14 +60,20 @@ const Products = ({ cat, filters, sort }) => {
       );
     }
   }, [sort]);
+  if (filteredProducts.length > 0) {
+    filterContent = filteredProducts.map((product) => {
+      return <Product key={product.id} product={product} />;
+    });
+  }
 
   return (
     <Container>
       {cat
-        ? filteredProducts.map((product) => {
-            return <Product key={product.id} product={product} />;
-          })
-        : products.map((product) => (
+        ? filterContent
+        : // ? filteredProducts.map((product) => {
+          //     return <Product key={product.id} product={product} />;
+          //   })
+          products.map((product) => (
             <Product key={product.id} product={product} />
           ))}
     </Container>

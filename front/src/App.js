@@ -9,7 +9,7 @@ import Newsletter from "./components/product/Newsletter";
 import Footer from "./components/home/Footer";
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
-import Product from "./pages/Product";
+import ProductDetail from "./pages/ProductDetail";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/products" element={<ProductList />}>
             <Route path=":category" element={<ProductList />} />
           </Route>
-          <Route path="/product/:id" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
