@@ -9,6 +9,8 @@ import Announcement from "../components/home/Announcement";
 import Newsletter from "../components/product/Newsletter";
 import Footer from "../components/home/Footer";
 import { useLocation } from "react-router-dom";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const ProductDetail = () => {
   const location = useLocation();
@@ -17,7 +19,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
-  console.log(color, size);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -41,7 +43,11 @@ const ProductDetail = () => {
   };
 
   /* update Cart */
-  const handleClick = () => {};
+  const handleClick = () => {
+    console.log("dispatch:", dispatch(addProduct));
+
+    dispatch(addProduct({ ...product, quantity, color, size }));
+  };
 
   return (
     <Container>
@@ -55,6 +61,7 @@ const ProductDetail = () => {
           <Title> {product.title}</Title>
           <Desc>{product.desc}</Desc>
           <Price>{product.price}원</Price>
+
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
