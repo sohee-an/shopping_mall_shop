@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Add, Remove } from "@mui/icons-material";
 import { moblie } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
   return (
     <Container>
       <Wrapper>
@@ -18,63 +21,45 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://img.freepik.com/free-photo/many-colorful-paper-shopping-bags-in-cart_23-2147892174.jpg?w=1060&t=st=1672910712~exp=1672911312~hmac=3eb9267c5937f9bae8e178accbf8c36668482009722f49c7eca70dd4ec83bc93" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b>JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>JESSIE THUNDER SHOES
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b>JESSIE THUNDER SHOES
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>18000원</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((cartProduct) => {
+              return (
+                <Product>
+                  <ProductDetail>
+                    <Image src={cartProduct.img} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b>
+                        {cartProduct.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b>
+                        {cartProduct._id}
+                      </ProductId>
+                      <ProductColor color={cartProduct.color} />
+                      <ProductSize>
+                        <b>Size:</b>
+                        {cartProduct.size}
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Add />
+                      <ProductAmount>{cartProduct.quantity}</ProductAmount>
+                      <Remove />
+                    </ProductAmountContainer>
+                    <ProductPrice>{cartProduct.price}원</ProductPrice>
+                  </PriceDetail>
+                </Product>
+              );
+            })}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://img.freepik.com/free-photo/many-colorful-paper-shopping-bags-in-cart_23-2147892174.jpg?w=1060&t=st=1672910712~exp=1672911312~hmac=3eb9267c5937f9bae8e178accbf8c36668482009722f49c7eca70dd4ec83bc93" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b>JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>JESSIE THUNDER SHOES
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b>JESSIE THUNDER SHOES
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>18000원</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>9800원</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total}원</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
@@ -82,7 +67,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>4800원</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total}원</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>
