@@ -59,8 +59,10 @@ userRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
 //admin _all user
 userRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
   const newUsersNumber = req.query.new;
+
   try {
     // 최신 유저만 보여주기
+
     const newLimitedUsers = await userService.findLimitUsers(newUsersNumber);
 
     //const { password, ...others } = getUser._doc;
@@ -75,6 +77,7 @@ userRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
 userRouter.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
   try {
     const data = await userService.findStatsUsers(lastYear);
     console.log(data);

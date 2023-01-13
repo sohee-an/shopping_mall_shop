@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { publicRequest } from "../../requestMethod";
 import styled from "styled-components";
 
 import Product from "./product";
@@ -17,8 +18,8 @@ const Products = ({ cat, filters, sort }) => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          cat ? `/api/products/?category=${cat}` : `/api/products`
+        const res = await publicRequest.get(
+          cat ? `/products/?category=${cat}` : `/products`
         );
 
         setProducts(res.data);
