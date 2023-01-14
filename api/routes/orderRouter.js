@@ -68,14 +68,17 @@ orderRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
 //get monthly incone
 orderRouter.get("/income", verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();
-
+  //이번 달과 이 이전 달 수입
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
-  console.log("last", lastMonth);
-  console.log("prev", previousMonth);
+  const previousMonth = new Date(date.setMonth(date.getMonth() - 2));
+  // const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+  // console.log("last", lastMonth);
+  // console.log("prev", previousMonth);
+
   try {
     const income = await orderService.findStatsOrder(previousMonth);
-    console.log(income);
+    console.log("income", income);
+
     res.status(201).json(income);
   } catch (err) {
     res.status(500).json(err);

@@ -5,6 +5,7 @@ const User = model("user", UserSchema);
 
 class UserModel {
   async create(userInfo) {
+    console.log("userInfo", userInfo);
     const saveUser = await User.create(userInfo);
     console.log(saveUser);
     return saveUser;
@@ -38,7 +39,7 @@ class UserModel {
 
   async findLimitUsers(newUsersNumber) {
     const findedLimitUsers = newUsersNumber
-      ? await User.find().sort({ _id: -1 }).limit(1)
+      ? await User.find().sort({ _id: -1 }).limit(5)
       : await User.find();
     return findedLimitUsers;
   }

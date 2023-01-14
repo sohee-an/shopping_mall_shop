@@ -14,20 +14,37 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `기술 스택`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- styled-components
+- axios
+- redux
+- reduxjs/toolkit
+- react-stripe-checkout
 
-### `npm run build`
+### 프로젝트 설명 & 서비스
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 사용자
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    - login,register: 로그인,로그아웃,회원가입 구현
+    - 메인페이지 : 상품 카테고리별로 이동 가능하게 구현
+    - productDetail: 상품의 자세한 내용이 적혀있음, 상품의 수량 색깔을
+             골라서 장바구니로 이동 가능함
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-
+
+# Adimn
+
+- homePage
+  월별 사용자를 그래프로 볼 수 있음
+  최근 사용자를 볼 수 있음( 인원수 조정 가능 현제 5명 )
+  주문 내역을 확인할 수 있음
+  Revanue : 이번달과 작년달의 매출을 확인할 수 있음
+
+- Products
+  제품들을 한번에 다 확인할 수 있음
+  제품을 삭제할 수 있음(db에서 삭제됨)
+  edit를 누르면 상품을 편집할수 있음
 
 ### `npm run eject`
 

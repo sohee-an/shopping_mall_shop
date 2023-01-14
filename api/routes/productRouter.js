@@ -29,9 +29,10 @@ productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-// delete update
+// delete
 productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
+    console.log("id", req.params.id);
     const deletedProduct = await productService.deletProduct(req.params.id);
     res.status(201).json(deletedProduct);
   } catch (err) {

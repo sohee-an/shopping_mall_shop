@@ -8,10 +8,12 @@ class AuthService {
   }
   //회원가입
   async addUser(userInfo) {
-    const { email, username, password } = userInfo;
+    const { email, username, password, name, lastName } = userInfo;
     const newUser = {
       username: username,
       email: email,
+      name: name,
+      lastName: lastName,
       password: CryptoJS.AES.encrypt(
         password,
         process.env.SECRET_KEY
@@ -28,7 +30,7 @@ class AuthService {
 
     console.log("loginuser", user);
     if (!user) {
-      return "이름을 다시 확인해주세요 ";
+      throw "이름을 다시 확인해주세요 ";
     }
 
     const hashedPassword = CryptoJS.AES.decrypt(
@@ -39,7 +41,7 @@ class AuthService {
     console.log(OriginalPassword !== password);
 
     if (OriginalPassword !== password) {
-      return "비밀번호를 다시 확인해주세요 ";
+      throw "비밀번호를 다시 확인해주세요 ";
     } else {
       const accessToken = jwt.sign(
         {

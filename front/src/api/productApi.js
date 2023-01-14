@@ -1,8 +1,8 @@
-import axios from "axios";
+import { publicRequest } from "../requestMethod";
 
 const productApi = {
   getPrdouctApi: function getPrdouctApi(product_id) {
-    return axios.get(`/api/products/find/${product_id}`);
+    return publicRequest.get(`/products/find/${product_id}`);
   },
 };
 

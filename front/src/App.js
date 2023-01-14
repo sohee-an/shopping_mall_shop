@@ -7,34 +7,38 @@ import Categories from "./components/category/Categories";
 import Products from "./components/product/Products";
 import Newsletter from "./components/product/Newsletter";
 import Footer from "./components/home/Footer";
-import Home from "./pages/Home";
-import ProductList from "./pages/ProductList";
-import ProductDetail from "./pages/ProductDetail";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Cart from "./pages/Cart";
+import HomePage from "./pages/HomePage";
+import ProductListPage from "./pages/ProductListPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import CartPage from "./pages/CartPage";
+import SuccessPage from "./pages/SuccessPage";
 import ErrorPage from "./pages/ErrorPage";
+import { useSelector } from "react-redux";
 function App() {
-  const user = true;
+  const user = useSelector((state) => state.user.currentUser);
   //유저가
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/register"
-            element={user ? <Navigate replace to="/" /> : <Register />}
+            element={<RegisterPage />}
+            // element={user ? <Navigate replace to="/" /> : <Register />}
           />
           <Route
             path="/login"
-            element={user ? <Navigate replace to="/" /> : <Login />}
+            element={user ? <Navigate replace to="/" /> : <LoginPage />}
           />
-          <Route path="/products" element={<ProductList />}>
-            <Route path=":category" element={<ProductList />} />
+          <Route path="/products" element={<ProductListPage />}>
+            <Route path=":category" element={<ProductListPage />} />
           </Route>
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/success" element={<SuccessPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

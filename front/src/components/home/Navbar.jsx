@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Search, ShoppingCart } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
 import { moblie } from "../../responsive";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { logOut } from "../../redux/userRedux";
+
 const Navbar = () => {
+  const [loginUser, setLoginUser] = useState(null);
   const quantity = useSelector((state) => state.cart.quantity);
+  const reduxLoginUser = useSelector((state) => state.user.currentUser);
+
+  const dispatch = useDispatch();
+  console.log("login", loginUser);
+
+  useEffect(() => {
+    reduxLoginUser && setLoginUser(reduxLoginUser);
+  }, [reduxLoginUser, loginUser]);
+
+  const onClickLogOut = useCallback(() => {
+    console.log("logout");
+    dispatch(logOut());
+  }, []);
 
   return (
     <Container>
@@ -23,8 +39,23 @@ const Navbar = () => {
           <Logo>A.S.O</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          {loginUser ? (
+            <>
+              <MenuItem>
+                <strong>{loginUser.username}</strong>
+              </MenuItem>
+              <MenuItem onClick={onClickLogOut}>LOG OUT</MenuItem>
+            </>
+          ) : (
+            <>
+              <Link to="/register">
+                <MenuItem>REGISTER</MenuItem>
+              </Link>
+              <Link to="/login">
+                <MenuItem>LOGIN</MenuItem>
+              </Link>
+            </>
+          )}
           <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={quantity} color="primary">
@@ -92,4 +123,6 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 10px;
   ${moblie({ fontSize: "12px" })}
+  text-decoration: none;
+  color: black;
 `;

@@ -4,15 +4,18 @@ const userService = require("../services/authService");
 
 authRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
-
+    const { username, email, password, name, lastName } = req.body;
+    console.log(req.body);
     const newUser = await userService.addUser({
       username,
       email,
       password,
+      name,
+      lastName,
     });
     res.status(201).json(newUser);
   } catch (error) {
+    console.log("err", error);
     res.status(500).json(error);
   }
 });
