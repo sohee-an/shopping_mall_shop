@@ -6,10 +6,31 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requestMethods";
+import { Link, useLocation } from "react-router-dom";
+import { format } from "timeago.js";
+
 import "./user.css";
 
 export default function User() {
+  const location = useLocation();
+  const userId = location.pathname.split("/")[2];
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await userRequest.get(`users/find/${userId}`);
+        setUser(res.data);
+        console.log("res", res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -27,19 +48,26 @@ export default function User() {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUsername">{user?.username}</span>
+              <span className="userShowUserFullName">
+                {user?.firstName} {user?.lastName}
+              </span>
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
+            <span className="userShowTitle">Activity History</span>
             <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowIcon">등록 날짜</span>
+              <span className="userShowInfoTitle">
+                {format(user?.createdAt)}
+              </span>
             </div>
             <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
+              <span className="userShowIcon">업데이트 날짜</span>
+              <span></span>
+              <span className="userShowInfoTitle">
+                {format(user?.updatedAt)}
+              </span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
@@ -64,39 +92,39 @@ export default function User() {
                 <label>Username</label>
                 <input
                   type="text"
-                  placeholder="annabeck99"
+                  placeholder={user?.username}
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Full Name</label>
+                <label>firstName</label>
                 <input
                   type="text"
-                  placeholder="Anna Becker"
+                  placeholder={user?.firstName}
                   className="userUpdateInput"
                 />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99@gmail.com"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="+1 123 456 67"
-                  className="userUpdateInput"
-                />
+                <div className="userUpdateItem">
+                  <label>lastName</label>
+                  <input
+                    type="text"
+                    placeholder={user?.firstName}
+                    className="userUpdateInput"
+                  />
+                </div>
+                <div className="userUpdateItem">
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    placeholder={user?.email}
+                    className="userUpdateInput"
+                  />
+                </div>
               </div>
               <div className="userUpdateItem">
                 <label>Address</label>
                 <input
                   type="text"
-                  placeholder="New York | USA"
+                  placeholder={user?.address || "등록안함"}
                   className="userUpdateInput"
                 />
               </div>

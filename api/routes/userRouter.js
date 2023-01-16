@@ -47,7 +47,7 @@ userRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     const userId = req.params.id;
 
     const getUser = await userService.findByIdUser(userId);
-    console.log(getUser);
+    //console.log(getUser);
     const { password, ...others } = getUser._doc;
 
     res.status(200).json({ ...others });

@@ -5,9 +5,9 @@ const Product = model("products", ProductSchema);
 
 class ProductModel {
   async saveProduct(newProduct) {
-    const saveProduct = await Product.create(newProduct);
-    console.log(saveProduct);
-    return saveProduct;
+    const savedProduct = await Product.create(newProduct);
+
+    return savedProduct;
   }
 
   async updateProduct(productId, updateProduct) {

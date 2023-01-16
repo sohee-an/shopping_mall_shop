@@ -34,9 +34,16 @@ class OrderModel {
     return allOrders;
   }
   //
-  async findStatsOrder(previousMonth) {
+  async findStatsOrder(previousMonth, productId) {
     const income = await Order.aggregate([
-      { $match: { createdAt: { $gte: previousMonth } } },
+      {
+        $match: {
+          createdAt: { $gte: previousMonth },
+          ...(productId && {
+            products: { $elemMatch: { productId } },
+          }),
+        },
+      },
       {
         $project: {
           month: { $month: "$createdAt" },

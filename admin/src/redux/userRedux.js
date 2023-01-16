@@ -1,29 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getAllUsersAllAction } from "./actions/userActon";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    currentUser: null,
+    users: [],
     isFetching: false,
     error: false,
   },
   reducers: {
-    loginStart: (state) => {
-      state.isFetching = true;
-    },
-    loginSuccess: (state, action) => {
-      state.isFetching = false;
-      state.currentUser = action.payload;
-    },
-    loginFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
-    logout: (state) => {
-      state.currentUser = null;
-    },
+    // logout: (state) => {
+    //   state.currentUser = null;
+    // },
   },
+  extraReducers: (builder) =>
+    builder
+      //all get user
+      .addCase(getAllUsersAllAction.pending, (state, action) => {
+        state.isFetching = true;
+      })
+      .addCase(getAllUsersAllAction.fulfilled, (state, action) => {
+        state.isFetching = true;
+        state.users = action.payload.data;
+      })
+      .addCase(getAllUsersAllAction.rejected, (state, action) => {
+        state.isFetching = true;
+        state.error = action.error;
+      }),
 });
 
-export const { loginStart, loginSuccess, loginFailure } = userSlice.actions;
 export default userSlice.reducer;

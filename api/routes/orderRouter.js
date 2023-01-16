@@ -67,6 +67,7 @@ orderRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 //get monthly incone
 orderRouter.get("/income", verifyTokenAndAdmin, async (req, res) => {
+  const productId = req.query.productId;
   const date = new Date();
   //이번 달과 이 이전 달 수입
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
@@ -76,7 +77,7 @@ orderRouter.get("/income", verifyTokenAndAdmin, async (req, res) => {
   // console.log("prev", previousMonth);
 
   try {
-    const income = await orderService.findStatsOrder(previousMonth);
+    const income = await orderService.findStatsOrder(previousMonth, productId);
     console.log("income", income);
 
     res.status(201).json(income);

@@ -2,74 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getProductsAllAction,
   deleteProductAction,
+  updateProductAction,
+  addProductAction,
 } from "./actions/productAction";
 
 export const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
+
     isFetching: false,
     error: false,
   },
-  reducers: {
-    //GET ALL
-    getProductStart: (state) => {
-      state.isFetching = true;
-      state.error = false;
-    },
-    getProductSuccess: (state, action) => {
-      state.isFetching = false;
-      state.products.push(action.payload);
-    },
-    getProductFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
-    //DELETE
-    deleteProductStart: (state) => {
-      state.isFetching = true;
-      state.error = false;
-    },
-    deleteProductSuccess: (state, action) => {
-      state.isFetching = false;
-      state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload),
-        1
-      );
-    },
-    deleteProductFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
-    //UPDATE
-    updateProductStart: (state) => {
-      state.isFetching = true;
-      state.error = false;
-    },
-    updateProductSuccess: (state, action) => {
-      state.isFetching = false;
-      state.products[
-        state.products.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.product;
-    },
-    updateProductFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
-    //UPDATE
-    addProductStart: (state) => {
-      state.isFetching = true;
-      state.error = false;
-    },
-    addProductSuccess: (state, action) => {
-      state.isFetching = false;
-      state.products.push(action.payload);
-    },
-    addProductFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
       //get all
@@ -98,6 +43,22 @@ export const productSlice = createSlice({
         );
       })
       .addCase(deleteProductAction.rejected, (state, action) => {
+        state.isFetching = false;
+        state.error = action.error;
+      })
+      //update
+      .addCase(updateProductAction.pending, (state, action) => {
+        state.isFetching = true;
+      })
+      .addCase(updateProductAction.fulfilled, (state, action) => {
+        state.isFetching = false;
+        state.products[
+          state.products.findIndex(
+            (item) => item._id === action.payload.data._id
+          )
+        ] = action.payload.data.product;
+      })
+      .addCase(updateProductAction.rejected, (state, action) => {
         state.isFetching = false;
         state.error = action.error;
       })

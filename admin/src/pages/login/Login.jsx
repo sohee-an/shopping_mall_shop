@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
+import { loginAdminAllAction } from "../../redux/actions/adminAction";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,16 +12,23 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const admin = useSelector((state) => state.user.currentUser?.isAdmin);
+  const isAdminCheck = useSelector((state) => state.admin.currentUser?.isAdmin);
+  const adminToken = useSelector(
+    (state) => state.admin.currentUser?.accessToken
+  );
 
   useEffect(() => {
-    admin && navigate("/home");
-  }, [admin]);
-  console.log("admin", admin);
+    if (isAdminCheck) {
+      localStorage.setItem("token", adminToken);
+      navigate("/home");
+    }
+  }, [isAdminCheck, adminToken]);
+  console.log("admin", isAdminCheck);
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    dispatch(loginAdminAllAction({ username, password }));
+    // login(dispatch, { username, password });
   };
 
   return (
