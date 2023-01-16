@@ -9,11 +9,10 @@ const {
 
 // product creates
 productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
-  //const newProduct = new Product(req.body);
-  const saveProduct = await productService.saveProduct(req.body);
-  res.status(200).json(saveProduct);
-
   try {
+    const savedProduct = await productService.saveProduct(req.body);
+    console.log("router", savedProduct);
+    res.status(200).json(savedProduct);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -21,9 +20,14 @@ productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
 
 // product update
 productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+  const updateProduct = req.body;
   try {
-    const updateProduct = await productService.updateProduct(req.params.id);
-    res.status(201).json(updateProduct);
+    const updatedProduct = await productService.updateProduct(
+      req.params.id,
+      updateProduct
+    );
+    console.log("updatedProduct", updatedProduct);
+    res.status(201).json(updatedProduct);
   } catch (err) {
     res.status(500).json(err);
   }

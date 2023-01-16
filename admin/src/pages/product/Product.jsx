@@ -10,7 +10,8 @@ import { userRequest } from "../../requestMethods";
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-  const [pStats, setPStats] = useState([]);
+  const [pStats, setPStats] = useState([]); //개인상품의 통계
+  const [list, setList] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
@@ -38,9 +39,17 @@ export default function Product() {
     const getStats = async () => {
       try {
         const res = await userRequest.get("orders/income?pid=" + productId);
-        const list = res.data.sort((a,b)=>{
-            return a._id - b._id
-        })
+
+        const list = res.data.sort((a, b) => {
+          return a._id - b._id;
+        });
+        if (list[0]._id - list[1]._id < 1) {
+          const reverseList = res.data.reverse();
+          setList(reverseList);
+        } else {
+          setList(list);
+        }
+
         list.map((item) =>
           setPStats((prev) => [
             ...prev,

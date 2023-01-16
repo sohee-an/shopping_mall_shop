@@ -11,11 +11,25 @@ const getProductsAllAction = createAsyncThunk(
 );
 
 const deleteProductAction = createAsyncThunk(
-  "/product/delete",
+  "/product/deleteProduct",
   async (productId, thunkAPI) => {
     // const res = await userRequest.delete(`/products/${prdouctId}`);
     const res = { _id: `${productId}` };
     return res;
   }
 );
-module.exports = { getProductsAllAction, deleteProductAction };
+// update
+const updateProductAction = createAsyncThunk(
+  "/product/updateProduct",
+  async (id, product, thunkAPI) => {
+    const res = await userRequest.put(`/products/${id}`);
+    console.log(res.data);
+    return res;
+  }
+);
+
+module.exports = {
+  getProductsAllAction,
+  deleteProductAction,
+  updateProductAction,
+};

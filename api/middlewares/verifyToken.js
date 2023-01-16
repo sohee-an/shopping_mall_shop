@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.token;
+
   console.log(authHeader);
   if (authHeader) {
-    const token = authHeader;
+    const token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.JWT_KEY, (err, user) => {
       if (err) res.status(403).json("  Token is valid"); //토큰이 잘못됫거나 만료되었을때
       req.user = user;

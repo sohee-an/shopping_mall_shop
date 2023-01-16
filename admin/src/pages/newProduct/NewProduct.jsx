@@ -7,13 +7,17 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import app from "../../firebase";
-import { addProduct } from "../../redux/apiCalls";
-import { useDispatch } from "react-redux";
+import productApi from "../../redux/api/product";
+
+import { addProductAction } from "../../redux/actions/productAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
+  const [checkProduct, setCheckProduct] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -21,7 +25,9 @@ export default function NewProduct() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+
   const handleCat = (e) => {
+    // ,로 분리해서 배열
     setCat(e.target.value.split(","));
   };
 
@@ -62,10 +68,18 @@ export default function NewProduct() {
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           const product = { ...inputs, img: downloadURL, categories: cat };
-          addProduct(product, dispatch);
+          try {
+            productApi
+              .addProductApi(product)
+              .then((res) => setCheckProduct(true));
+          } catch (err) {
+            console.log(err);
+          }
         });
       }
     );
+    // newProduct && setFile(null);
+    setCat([]);
   };
 
   return (
@@ -73,6 +87,9 @@ export default function NewProduct() {
       <h1 className="addProductTitle">New Product</h1>
       <form className="addProductForm">
         <div className="addProductItem">
+          {checkProduct && (
+            <div className="success">상품이 정상적으로 등록되었습니다.</div>
+          )}
           <label>Image</label>
           <input
             type="file"

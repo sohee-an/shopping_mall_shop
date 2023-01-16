@@ -16,20 +16,22 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
-import LogOut from "./pages/login/logOut";
+
 import { useEffect, useState } from "react";
 
 function App() {
   const [admin, setAdmin] = useState(false);
-  const adminRedux = useSelector((state) => state.user.currentUser?.isAdmin);
+  const adminRedux = useSelector((state) => state.admin.currentUser?.isAdmin);
+
   useEffect(() => {
-    setAdmin(adminRedux);
+    adminRedux && setAdmin(adminRedux);
   }, [adminRedux]);
+  console.log("admin", admin);
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={admin ? <Login /> : <Home />} />
+        <Route path="/" element={!admin && <Login />} />
       </Routes>
       {admin && (
         <>
@@ -44,7 +46,6 @@ function App() {
               <Route path="/products" element={<ProductList />} />
               <Route path="/product/:productId" element={<Product />} />
               <Route path="/newproduct" element={<NewProduct />} />
-              <Route path="/logOut" element={<LogOut />} />
             </Routes>
           </div>
         </>

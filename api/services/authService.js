@@ -8,11 +8,11 @@ class AuthService {
   }
   //회원가입
   async addUser(userInfo) {
-    const { email, username, password, name, lastName } = userInfo;
+    const { email, username, password, firstName, lastName } = userInfo;
     const newUser = {
       username: username,
       email: email,
-      name: name,
+      firstName: firstName,
       lastName: lastName,
       password: CryptoJS.AES.encrypt(
         password,

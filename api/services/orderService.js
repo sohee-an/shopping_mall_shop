@@ -35,8 +35,11 @@ class OrderService {
     const allOrders = await this.orderModel.findAllOrders();
     return allOrders;
   }
-  async findStatsOrder(previousMonth) {
-    const incomeOrders = await this.orderModel.findStatsOrder(previousMonth);
+  async findStatsOrder(previousMonth, productId) {
+    const incomeOrders = await this.orderModel.findStatsOrder(
+      previousMonth,
+      productId
+    );
     return incomeOrders;
   }
 }

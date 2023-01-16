@@ -7,37 +7,10 @@ class ProductService {
     this.productModel = productModel;
   }
 
-  //   //delete id로
-  //   async delete(userId) {
-  //     const deleteUser = await this.userModel.delete(userId);
-  //     return deleteUser;
-  //   }
-  //   // findUser id로
-  //   async findByIdUser(userId) {
-  //     const findUser = await this.userModel.findById(userId);
-  //     console.log(findUser);
-  //     return findUser;
-  //   }
-
-  //   async findAllUsers() {
-  //     const allUsers = await this.userModel.findAllUsers();
-  //     return allUsers;
-  //   }
-
-  //   async findLimitUsers(newUsersNumber) {
-  //     const findedLimitUsers = await this.userModel.findLimitUsers(
-  //       newUsersNumber
-  //     );
-  //     return findedLimitUsers;
-  //   }
-
-  //   async findStatsUsers(lastYear) {
-  //     const findedStatsUsers = await this.userModel.findStateUsers(lastYear);
-  //     return findedStatsUsers;
-  //   }
   async saveProduct(newProduct) {
-    const saveProdcut = await this.productModel.saveProduct(newProduct);
-    return saveProdcut;
+    const savedProdcut = await this.productModel.saveProduct(newProduct);
+    console.log("service", savedProdcut);
+    return savedProdcut;
   }
   //update
   async updateProduct(productId, updateProduct) {
@@ -45,6 +18,7 @@ class ProductService {
       productId,
       updateProduct
     );
+    console.log("service,", updatedProduct);
     return updatedProduct;
   }
   //delete
