@@ -4,35 +4,42 @@ import { Remove, Add } from "@mui/icons-material";
 import { moblie } from "../responsive";
 import productApi from "../api/productApi";
 
-import Navbar from "../components/home/Navbar";
-import Announcement from "../components/home/Announcement";
 import Newsletter from "../components/product/Newsletter";
 import Footer from "../components/home/Footer";
-import { useLocation } from "react-router-dom";
-import { addProduct } from "../redux/cartRedux";
-import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addCartAction, updateCartAction } from "../redux/actions/cart";
 
 const ProductDetailPage = () => {
   const location = useLocation();
   const product_id = location.pathname.split("/")[2];
-  const [product, setProduct] = useState({});
+  const [productInfo, setProductInfo] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(null);
-  const [size, setSize] = useState(null);
+  const [size, setSize] = useState("S");
   const dispatch = useDispatch();
+  const [userTokenCheck, setUserTokenCheck] = useState(null);
+  const userToken = useSelector((state) => state.user.currentUser);
+  const userId = useSelector((state) => state.user.currentUser?._id);
+  const prevCart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+
+  console.log("prev", prevCart);
 
   useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await productApi.getPrdouctApi(product_id);
-        setProduct(res.data);
+        // console.log("res", res.data);
+        setProductInfo(res.data);
+        setUserTokenCheck(userToken);
       } catch (err) {
         console.log(err);
       }
     };
     getProduct();
   }, [product_id]);
-  console.log(product);
 
   const handleQuantity = (type) => {
     if (type === "dec") {
@@ -44,28 +51,48 @@ const ProductDetailPage = () => {
 
   /* update Cart */
   const handleClick = () => {
-    console.log("dispatch:", dispatch(addProduct));
+    if (userTokenCheck === null) {
+      navigate("/login");
+    }
+    if (color !== null && prevCart.products.length == 0) {
+      const total = quantity * productInfo.price;
+      dispatch(
+        addCartAction({ ...productInfo, quantity, color, size, userId, total })
+      );
+      //dispatch(addProduct({ ...product, quantity, color, size }));
+    } else if (color !== null && prevCart.products.length > 0) {
+      const prevCartProductArray = prevCart.products;
 
-    dispatch(addProduct({ ...product, quantity, color, size }));
+      const total = quantity * productInfo.price;
+      const product = productInfo._id;
+
+      dispatch(
+        updateCartAction({
+          userId: userId,
+          updateproduct: [
+            ...prevCartProductArray,
+            { product, quantity, color, size, total },
+          ],
+        })
+      );
+    }
   };
 
   return (
     <Container>
-      <Navbar />
-      <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src={product.img} />
+          <Image src={productInfo.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title> {product.title}</Title>
-          <Desc>{product.desc}</Desc>
-          <Price>{product.price}원</Price>
+          <Title> {productInfo.title}</Title>
+          <Desc>{productInfo.desc}</Desc>
+          <Price>{productInfo.price}원</Price>
 
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              {product.color?.map((color) => (
+              {productInfo.color?.map((color) => (
                 <FilterColor
                   key={color}
                   color={color}
@@ -73,15 +100,21 @@ const ProductDetailPage = () => {
                 />
               ))}
             </Filter>
+
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size?.map((size) => (
+                {productInfo.size?.map((size) => (
                   <FilterSizeOption key={size}>{size}</FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
+          {color === null ? (
+            <ColorCheck>색깔을 골라주세요 </ColorCheck>
+          ) : (
+            <ColorChoice>{color}색을 고르셨습니다.</ColorChoice>
+          )}
           <AddContainer>
             <AmountContainer>
               <Remove
@@ -99,7 +132,6 @@ const ProductDetailPage = () => {
         </InfoContainer>
       </Wrapper>
       <Newsletter />
-      <Footer />
     </Container>
   );
 };
@@ -199,4 +231,12 @@ const Button = styled.button`
   &:hover {
     background-color: #f8f4f4;
   }
+`;
+const ColorCheck = styled.span`
+  color: red;
+  font-size: 10px;
+`;
+const ColorChoice = styled.span`
+  color: gray;
+  font-size: 10px;
 `;

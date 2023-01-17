@@ -4,7 +4,6 @@ const { publicRequest } = require("../../requestMethod");
 const signUpAction = createAsyncThunk(
   "/auth/register",
   async (data, thunkAPI) => {
-    console.log(data);
     const res = await publicRequest.post("/auth/register", data);
     console.log("res", res);
     return res;

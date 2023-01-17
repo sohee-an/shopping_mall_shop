@@ -9,10 +9,9 @@ const {
 
 // cart creates
 cartRouter.post("/", verifyToken, async (req, res) => {
-  const saveCart = await cartService.saveCart(req.body);
-  res.status(200).json(saveCart);
-
   try {
+    const saveCart = await cartService.saveCart(req.body);
+    res.status(200).json(saveCart);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -47,7 +46,10 @@ cartRouter.get(
   async (req, res) => {
     try {
       const getCart = await cartService.getCart(req.params.userId);
-      res.status(201).json(getCart);
+      const getCartProducts = getCart.products;
+      console.log("getCart", getCart);
+
+      res.status(201).json(getCartProducts);
     } catch (err) {
       res.status(500).json(err);
     }

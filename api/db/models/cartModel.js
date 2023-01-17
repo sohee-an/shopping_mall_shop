@@ -10,12 +10,13 @@ class CartModel {
     return saveCart;
   }
   //update
-  async updateCart(cartId, updateCart) {
-    const updatedCart = await Cart.findByIdAndUpdate(
-      cartId,
-      { $set: updateCart },
+  async updateCart(userId, updateCart) {
+    const updatedCart = await Cart.update(
+      { userId: userId },
+      { $set: { products: updateCart } },
       { new: true }
     );
+
     return updatedCart;
   }
   //delete
@@ -24,8 +25,11 @@ class CartModel {
     return deletedCart;
   }
   //get user cart
-  async getCart(cartId) {
-    const getCart = await Cart.findOne({ userId: cartId });
+  async getCart(userId) {
+    const getCart = await Cart.findOne({ userId: userId }).populate(
+      "products.product"
+    );
+
     return getCart;
   }
   //get all carts

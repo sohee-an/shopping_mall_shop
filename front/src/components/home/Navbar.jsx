@@ -4,26 +4,45 @@ import { Search, ShoppingCart } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
 import { moblie } from "../../responsive";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import { getAllCartAction } from "../../redux/actions/cart";
 
 import { logOut } from "../../redux/userRedux";
+import { logOutCartAction } from "../../redux/cartRedux";
 
 const Navbar = () => {
   const [loginUser, setLoginUser] = useState(null);
+  // const [cartQuantity, setCartQuantity] = useState(0);
   const quantity = useSelector((state) => state.cart.quantity);
-  const reduxLoginUser = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.user.currentUser);
+  console.log("qu", quantity);
 
   const dispatch = useDispatch();
-  console.log("login", loginUser);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    reduxLoginUser && setLoginUser(reduxLoginUser);
-  }, [reduxLoginUser, loginUser]);
+    if (user !== null) {
+      setLoginUser(user);
+      dispatch(getAllCartAction(user?._id));
+      // setCartQuantity(quantity);
+    } else {
+      setLoginUser(null);
+
+      <Navigate replace to="/" />;
+    }
+  }, [user, loginUser]);
 
   const onClickLogOut = useCallback(() => {
-    console.log("logout");
     dispatch(logOut());
+    dispatch(logOutCartAction());
   }, []);
+
+  const onClick = useCallback(() => {
+    user === null && navigate("/login");
+  });
+  const onClickHome = useCallback(() => {
+    navigate("/");
+  });
 
   return (
     <Container>
@@ -36,13 +55,13 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>A.S.O</Logo>
+          <Logo onClick={onClickHome}>A.S.O</Logo>
         </Center>
         <Right>
-          {loginUser ? (
+          {loginUser !== null ? (
             <>
               <MenuItem>
-                <strong>{loginUser.username}</strong>
+                <strong>{loginUser?.username}</strong>
               </MenuItem>
               <MenuItem onClick={onClickLogOut}>LOG OUT</MenuItem>
             </>
@@ -58,7 +77,7 @@ const Navbar = () => {
           )}
           <Link to="/cart">
             <MenuItem>
-              <Badge badgeContent={quantity} color="primary">
+              <Badge onClick={onClick} badgeContent={quantity} color="primary">
                 <ShoppingCart color="action" />
               </Badge>
             </MenuItem>
@@ -109,6 +128,7 @@ const Center = styled.div`
 const Logo = styled.h1`
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
   ${moblie({ fontSize: "24px" })}
 `;
 const Right = styled.div`

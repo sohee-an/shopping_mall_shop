@@ -6,6 +6,7 @@ export const login = async (dispatch, user) => {
 
   try {
     const res = await publicRequest.post("/auth/login", user);
+    console.log("res", res.data);
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure(err.response.data));

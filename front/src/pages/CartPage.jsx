@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Add, Remove } from "@mui/icons-material";
 import { moblie } from "../responsive";
 import { useSelector } from "react-redux";
@@ -12,12 +12,18 @@ const KEY = process.env.REACT_APP_STRIPE;
 const CartPage = () => {
   const navigate = useNavigate();
   const [stripeToken, setStripeToken] = useState(null);
-  const cart = useSelector((state) => state.cart);
+  const [carts, setCarts] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [discount, setDiscount] = useState(5000);
+  const cartProduct = useSelector((state) => state.cart);
 
   const onToken = (token) => {
     setStripeToken(token);
   };
-  console.log(stripeToken);
+
+  useEffect(() => {
+    setCarts(cartProduct);
+  }, []);
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -26,21 +32,29 @@ const CartPage = () => {
           tokenId: stripeToken.id,
           amount: 500,
         });
-        console.log(res.data);
+        console.log("payment res", res.data);
         navigate("/success", { state: { data: res.data } });
       } catch (err) {
         console.log(err);
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total]);
+  }, [stripeToken]);
+
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity((prevQuantity) => prevQuantity - 1);
+    } else {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
+  };
 
   return (
     <Container>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => navigate("/")}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist</TopText>
@@ -49,34 +63,41 @@ const CartPage = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((cartProduct) => {
+            {carts.products?.map((cartProduct) => {
               return (
                 <Product>
                   <ProductDetail>
-                    <Image src={cartProduct.img} />
+                    <Image src={cartProduct.product.img} />
                     <Details>
                       <ProductName>
                         <b>Product:</b>
-                        {cartProduct.title}
+                        {cartProduct.product.title}
                       </ProductName>
                       <ProductId>
                         <b>ID:</b>
-                        {cartProduct._id}
+                        {cartProduct.product._id}
                       </ProductId>
                       <ProductColor color={cartProduct.color} />
                       <ProductSize>
                         <b>Size:</b>
-                        {cartProduct.size}
+                        {cartProduct?.size}
                       </ProductSize>
                     </Details>
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
-                      <Add />
+                      <Remove
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleQuantity("dec")}
+                      />
+
                       <ProductAmount>{cartProduct.quantity}</ProductAmount>
-                      <Remove />
+                      <Add
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleQuantity("aec")}
+                      />
                     </ProductAmountContainer>
-                    <ProductPrice>{cartProduct.price}원</ProductPrice>
+                    <ProductPrice>{cartProduct.product.price}원</ProductPrice>
                   </PriceDetail>
                 </Product>
               );
@@ -87,23 +108,23 @@ const CartPage = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>{cart.total}원</SummaryItemPrice>
+              <SummaryItemPrice>{carts?.total}원</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>-5000원</SummaryItemPrice>
+              <SummaryItemPrice>-{discount}원</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>{cart.total}원</SummaryItemPrice>
+              <SummaryItemPrice>{carts?.total - discount}원</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
               name="A.S.O Shop"
               image="https://img.freepik.com/free-psd/shopping-cart-icon-isolated-3d-render-ilustration_439185-12373.jpg?w=740&t=st=1673333694~exp=1673334294~hmac=5026329acde05a7aba7091b7dfce1c98625651db198d4b8dedc142e62c44c161"
               billingAddress
               shippingAddress
-              description={`Your total is $${cart.total}`}
-              amount={cart.total * 100}
+              description={`Your total is $${carts?.total}`}
+              amount={carts?.total * 100}
               token={onToken}
               stripeKey={KEY}
             >
@@ -172,6 +193,7 @@ const Summary = styled.div`
 
 const Product = styled.div`
   display: flex;
+  margin-bottom: 15px;
   justify-content: space-between;
   ${moblie({ flexDirection: "column" })}
 `;
@@ -192,10 +214,10 @@ const ProductName = styled.div``;
 const ProductId = styled.div``;
 const ProductSize = styled.div``;
 const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background-color: #${(props) => props.color};
+  background-color: ${(props) => props.color};
 `;
 
 const PriceDetail = styled.div`

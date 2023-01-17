@@ -3,11 +3,9 @@ import styled from "styled-components";
 import { moblie } from "../responsive";
 import { useLocation } from "react-router-dom";
 
-import Navbar from "../components/home/Navbar";
-import Announcement from "../components/home/Announcement";
 import Products from "../components/product/Products";
 import Newsletter from "../components/product/Newsletter";
-import Footer from "../components/home/Footer";
+
 export const SortType = {
   SORT: "newest",
   ASC: "asc",
@@ -29,8 +27,6 @@ const ProductListPage = () => {
   };
   return (
     <Container>
-      <Navbar />
-      <Announcement />
       <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
@@ -66,7 +62,6 @@ const ProductListPage = () => {
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
-      <Footer />
     </Container>
   );
 };
