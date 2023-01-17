@@ -80,7 +80,8 @@ const Footer = () => {
 export default Footer;
 const Container = styled.div`
   display: flex;
-  ${moblie({ flexDirection: "column" })}
+  margin-top: 40px;
+  ${moblie({ flexDirection: "column" })};
 `;
 
 const Left = styled.div`

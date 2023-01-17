@@ -3,21 +3,25 @@ import styled from "styled-components";
 import { moblie } from "../responsive";
 import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isFetching, error, errorMessage } = useSelector(
     (state) => state.user
   );
-  console.log(errorMessage);
+  const user = useSelector((state) => state.user.currentUser);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     login(dispatch, { username, password });
   };
+  user && navigate("/");
 
   return (
     <Container>

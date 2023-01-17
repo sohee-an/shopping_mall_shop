@@ -11,8 +11,8 @@ class CartService {
     return saveCart;
   }
   //update
-  async updateCart(cartId, updateCart) {
-    const updatedCart = await this.cartModel.updateCart(cartId, updateCart);
+  async updateCart(userId, updateCart) {
+    const updatedCart = await this.cartModel.updateCart(userId, updateCart);
     return updatedCart;
   }
 
@@ -23,8 +23,10 @@ class CartService {
   }
 
   //get user cart
-  async getCart(cartId) {
-    const getCart = await this.cartModel.getCart(cartId);
+  async getCart(userId) {
+    const getCart = await this.cartModel.getCart(userId);
+    //const productArray = getCart.products;
+
     return getCart;
   }
   //get all cart

@@ -10,10 +10,10 @@ const {
 // order creates
 orderRouter.post("/", verifyToken, async (req, res) => {
   console.log(req.body);
-  const saveOrder = await orderService.saveOrder(req.body);
-  res.status(200).json(saveOrder);
 
   try {
+    const saveOrder = await orderService.saveOrder(req.body);
+    res.status(200).json(saveOrder);
   } catch (err) {
     res.status(500).json(err);
   }

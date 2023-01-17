@@ -40,6 +40,7 @@ const Info = styled.div`
 `;
 const Title = styled.h1`
   margin-bottom: 15px;
+  color: black;
 `;
 const Button = styled.button`
   border: none;

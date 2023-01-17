@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { signUpAction } from "./actions/signup";
 
 const userSlice = createSlice({
   name: "user",
@@ -26,6 +27,21 @@ const userSlice = createSlice({
       state.currentUser = null;
     },
   },
+  extraReducers: (builder) =>
+    builder
+
+      .addCase(signUpAction.pending, (state, action) => {})
+      .addCase(signUpAction.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+      })
+      .addCase(signUpAction.rejected, (state, action) => {
+        state.currentUser = null;
+        state.error = action.error;
+      })
+      .addMatcher((action) => {})
+      .addDefaultCase((state, action) => {
+        //default
+      }),
 });
 
 export const { loginStart, loginSuccess, loginFailure, logOut } =

@@ -1,63 +1,69 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { moblie } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpAction } from "../redux/actions/signup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [term, setTerm] = useState("");
+  const [termError, setTermError] = useState(false);
 
   const [passwordError, setPasswordError] = useState(false);
 
   const onChangePasswordCheck = useCallback(
     (e) => {
       setConfirmPassword(e.target.value);
-      if (confirmPassword === password) {
-        setPasswordError(true);
-      }
-      // setPasswordError(e.target.value === password);
+      setPasswordError(e.target.value !== password);
     },
     [password]
   );
+  const onChangeTerm = useCallback((e) => {
+    setTerm(e.target.checked);
+    setTermError(false);
+  }, []);
 
   const dispatch = useDispatch();
-  const { isFetching, error, currentUser } = useSelector(
-    (state) => state.signUp
-  );
+  const { error, currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const onClick = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      return setPasswordError(true);
+    }
+    if (!term) {
+      return setTermError(true);
+    }
 
-    passwordError &&
-      dispatch(
-        signUpAction({
-          username: username,
-          email: email,
-          password: password,
-          name: name,
-          lastName: lastName,
-        })
-      );
+    dispatch(
+      signUpAction({
+        username: username,
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      })
+    );
   };
 
-  currentUser?.data && navigate("/login");
+  currentUser?.data && <Navigate replace to="/" />;
 
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Input
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <Input
             placeholder="last name"
@@ -89,15 +95,21 @@ const RegisterPage = () => {
           />
           {error && <Warm>username 또는 email로 된 아이디가 있습니다.</Warm>}
           {passwordError && (
-            <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
+            <ErrorMessage>비밀번호가 일치하지않습니다.</ErrorMessage>
+          )}
+          {termError && (
+            <ErrorMessage>개인정보 처리에 동의하셔야 합니다.</ErrorMessage>
           )}
           <AgreementContainer>
-            <CheckBox type="checkbox"></CheckBox>
-            <Agreement>개인정보처리방침의 동의하십니까?</Agreement>
+            <TermCheck
+              type="checkbox"
+              name="user-term"
+              checked={term}
+              onChange={onChangeTerm}
+            ></TermCheck>
+            <TermDesc>개인정보 처리에 동의하십니까?</TermDesc>
           </AgreementContainer>
-          <Button onClick={onClick} disabled={isFetching}>
-            CREATE
-          </Button>
+          <Button type="submit">CREATE</Button>
         </Form>
       </Wrapper>
     </Container>
@@ -142,10 +154,13 @@ const Input = styled.input`
 const AgreementContainer = styled.div`
   display: flex;
 `;
-const Agreement = styled.div`
+const TermCheck = styled.input`
   font-size: 12px;
-
   margin: 20px 0px;
+`;
+const TermDesc = styled.div`
+  font-size: 12px;
+  margin: 20px 10px;
 `;
 const Button = styled.button`
   width: 40%;
