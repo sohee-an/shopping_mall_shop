@@ -11,7 +11,7 @@ const {
 productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const savedProduct = await productService.saveProduct(req.body);
-    console.log("router", savedProduct);
+
     res.status(200).json(savedProduct);
   } catch (err) {
     res.status(500).json(err);
@@ -21,6 +21,9 @@ productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
 // product update
 productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   const updateProduct = req.body;
+
+  console.log(req.body);
+
   try {
     const updatedProduct = await productService.updateProduct(
       req.params.id,
@@ -48,7 +51,7 @@ productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 productRouter.get("/find/:id", async (req, res) => {
   try {
     const getProduct = await productService.getProduct(req.params.id);
-    console.log("getProduct:", getProduct);
+
     res.status(201).json(getProduct);
   } catch (err) {
     res.status(500).json(err);

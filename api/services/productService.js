@@ -9,7 +9,7 @@ class ProductService {
 
   async saveProduct(newProduct) {
     const savedProdcut = await this.productModel.saveProduct(newProduct);
-    console.log("service", savedProdcut);
+
     return savedProdcut;
   }
   //update
@@ -18,7 +18,7 @@ class ProductService {
       productId,
       updateProduct
     );
-    console.log("service,", updatedProduct);
+
     return updatedProduct;
   }
   //delete

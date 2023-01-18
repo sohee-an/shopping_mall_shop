@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { login } from "../../redux/apiCalls";
+import { useNavigate, Navigate } from "react-router-dom";
 import { loginAdminAllAction } from "../../redux/actions/adminAction";
 
 const Login = () => {
@@ -12,6 +11,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const isAdminCheck = useSelector((state) => state.admin.currentUser?.isAdmin);
   const adminToken = useSelector(
     (state) => state.admin.currentUser?.accessToken
@@ -19,20 +19,22 @@ const Login = () => {
 
   useEffect(() => {
     if (isAdminCheck) {
-      localStorage.setItem("token", adminToken);
-      navigate("/home");
+      navigate("/");
     }
   }, [isAdminCheck, adminToken]);
-  console.log("admin", isAdminCheck);
 
-  const handleClick = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginAdminAllAction({ username, password }));
-    // login(dispatch, { username, password });
+    dispatch(loginAdminAllAction({ username, password }))
+      .then((originalPromiseResult) => {
+        navigate("/");
+      })
+      .catch((rejectedValueOrSerializedError) => {});
   };
 
   return (
-    <div
+    <form
+      onSubmit={onSubmit}
       style={{
         height: "100vh",
         display: "flex",
@@ -53,10 +55,10 @@ const Login = () => {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
+      <button type="submit" style={{ padding: 10, width: 100 }}>
         Login
       </button>
-    </div>
+    </form>
   );
 };
 

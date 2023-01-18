@@ -41,3 +41,7 @@
 .successNewProduct {
   color: green;
 }
+.successCheck {
+  color: red;
+  font-size: 15px;
+}
