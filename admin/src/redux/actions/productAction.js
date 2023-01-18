@@ -9,20 +9,28 @@ const getProductsAllAction = createAsyncThunk(
     return res;
   }
 );
+//add
+const addProductAction = createAsyncThunk(
+  "/product/add",
+  async (updateProduct, thunkAPI) => {
+    const res = await userRequest.post(`/products`, updateProduct);
+    return res;
+  }
+);
 
 const deleteProductAction = createAsyncThunk(
   "/product/deleteProduct",
   async (productId, thunkAPI) => {
-    // const res = await userRequest.delete(`/products/${prdouctId}`);
-    const res = { _id: `${productId}` };
+    const res = await userRequest.delete(`/products/${productId}`);
+    // const res = { _id: `${productId}` };
     return res;
   }
 );
 // update
 const updateProductAction = createAsyncThunk(
   "/product/updateProduct",
-  async (id, product, thunkAPI) => {
-    const res = await userRequest.put(`/products/${id}`);
+  async ({ productId, ...updateProduct }, thunkAPI) => {
+    const res = await userRequest.put(`/products/${productId}`, updateProduct);
     console.log(res.data);
     return res;
   }
@@ -32,4 +40,5 @@ module.exports = {
   getProductsAllAction,
   deleteProductAction,
   updateProductAction,
+  addProductAction,
 };

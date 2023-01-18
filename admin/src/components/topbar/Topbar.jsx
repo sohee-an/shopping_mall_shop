@@ -1,8 +1,26 @@
 import React from "react";
 import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { useCallback, useEffect } from "react";
+import { logoutAction } from "../../redux/adminRedux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Topbar() {
+  const user = useSelector((state) => state.admin.currentUser);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    dispatch(logoutAction());
+  };
+  useEffect(() => {
+    if (user === null) {
+      navigate("/login");
+    }
+  }, [user]);
+
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -15,14 +33,17 @@ export default function Topbar() {
             <span className="topIconBadge">2</span>
           </div>
           <div className="topbarIconContainer">
-            <Language />
-            <span className="topIconBadge">2</span>
+            {user?.isAdmin && (
+              <div className="loginButton" onClick={onClick}>
+                LOG OUT
+              </div>
+            )}
           </div>
           <div className="topbarIconContainer">
             <Settings />
           </div>
           <img
-            src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            src="https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"
             alt=""
             className="topAvatar"
           />

@@ -56,10 +56,18 @@ export const productSlice = createSlice({
           state.products.findIndex(
             (item) => item._id === action.payload.data._id
           )
-        ] = action.payload.data.product;
+        ] = action.payload.data;
       })
       .addCase(updateProductAction.rejected, (state, action) => {
         state.isFetching = false;
+        state.error = action.error;
+      })
+      //add
+      .addCase(addProductAction.pending, (state, action) => {})
+      .addCase(addProductAction.fulfilled, (state, action) => {
+        state.products.push(action.payload.data);
+      })
+      .addCase(addProductAction.rejected, (state, action) => {
         state.error = action.error;
       })
 

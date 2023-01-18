@@ -9,7 +9,7 @@ const adminSlice = createSlice({
     error: false,
   },
   reducers: {
-    logout: (state) => {
+    logoutAction: (state) => {
       state.currentUser = null;
     },
   },
@@ -29,5 +29,5 @@ const adminSlice = createSlice({
       }),
 });
 
-export const { loginStart, loginSuccess, loginFailure } = adminSlice.actions;
+export const { logoutAction } = adminSlice.actions;
 export default adminSlice.reducer;
