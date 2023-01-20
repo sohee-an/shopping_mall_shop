@@ -28,6 +28,7 @@ const getAllCartAction = createAsyncThunk(
 const updateCartAction = createAsyncThunk(
   "/carts/update",
   async (data, thunkAPI) => {
+    console.log("data", data);
     const res = await userRequest.put(
       `carts/${data.userId}`,
       data.updateproduct

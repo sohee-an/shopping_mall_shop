@@ -59,6 +59,7 @@ const ProductDetailPage = () => {
       dispatch(
         addCartAction({ ...productInfo, quantity, color, size, userId, total })
       );
+      console.log("얍", ...productInfo);
       //dispatch(addProduct({ ...product, quantity, color, size }));
     } else if (color !== null && prevCart.products.length > 0) {
       const prevCartProductArray = prevCart.products;

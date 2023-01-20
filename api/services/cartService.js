@@ -25,6 +25,7 @@ class CartService {
   //get user cart
   async getCart(userId) {
     const getCart = await this.cartModel.getCart(userId);
+    console.log("servicegetCart", getCart);
     //const productArray = getCart.products;
 
     return getCart;
