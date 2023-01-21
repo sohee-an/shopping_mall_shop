@@ -16,18 +16,22 @@ const LoginPage = () => {
   );
   const user = useSelector((state) => state.user.currentUser);
 
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
+    console.log("hi");
 
     login(dispatch, { username, password });
   };
   user && navigate("/");
+  const onClick = () => {
+    console.log("click");
+  };
 
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={onSubmit}>
           <Input
             onChange={(e) => setUsername(e.target.value)}
             placeholder="username"
@@ -37,9 +41,7 @@ const LoginPage = () => {
             type="password"
             placeholder="password"
           />
-          <Button type="submit" disabled={isFetching}>
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
           {errorMessage && <Error>{errorMessage}</Error>}
           <Link>비밀번호를 잃어버리셨나요?</Link>
           <Link>회원가입 하러 가기</Link>

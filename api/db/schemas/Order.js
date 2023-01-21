@@ -14,6 +14,10 @@ const OrderSchema = new Schema(
           type: Number,
           default: 1,
         },
+        total: {
+          type: Number,
+          default: 0,
+        },
       },
     ],
     amount: { type: Number, require: true },

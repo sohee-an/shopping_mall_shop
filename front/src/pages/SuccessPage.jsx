@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { userRequest } from "../requestMethod";
 const SuccessPage = () => {
-  const location = useLocation;
-  console.log("location", location);
+  const { state } = useLocation();
+  const [successData, setSuccessData] = useState(false);
+
+  console.log(state);
+  useEffect(() => {
+    state & setSuccessData(true);
+  });
+
+  // useEffect(()=>{
+  //   if(state){
+  //     const postOrders=()=>{
+  //       try{
+  //         const res = userRequest.
+  //       }
+  //     }
+  //   }
+  // })
   return (
     <Container>
       <Wrapper>

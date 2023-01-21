@@ -40,27 +40,23 @@ cartRouter.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 // get user cart
-cartRouter.get(
-  "/find/:userId",
-  verifyTokenAndAuthorization,
-  async (req, res) => {
-    try {
-      const getCart = await cartService.getCart(req.params.userId);
-      const getCartProducts = getCart.products;
-      console.log("getCart", getCart);
+cartRouter.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const getCart = await cartService.getCart(req.params.id);
+    const getCartProducts = getCart.products;
+    console.log("getCartRouter", getCartProducts);
 
-      res.status(201).json(getCartProducts);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    res.status(201).json(getCartProducts);
+  } catch (err) {
+    res.status(500).json(err);
   }
-);
+});
 
 // get all product
 cartRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const allCarts = await productService.findAllCarts();
-
+    console.log("allcarts", allCarts);
     res.status(201).json(allCarts);
   } catch (err) {
     res.status(500).json(err);

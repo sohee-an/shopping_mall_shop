@@ -21,30 +21,12 @@ stripeRoute.post("/payment", async (req, res) => {
         res.status(500).json(stripeErr);
       } else {
         console.log("success");
+
         res.status(200).json(stripeRes);
       }
     }
   );
   console.log("payment", payment);
 });
-// stripeRoute.post("/payment", async (req, res) => {
-//   try {
-//     const paymentIntent = await stripe.paymentIntents.create(args);
-//     console.log("payment", paymentIntent);
-//     console.log("No error.");
-//   } catch (e) {
-//     switch (e.type) {
-//       case "StripeCardError":
-//         console.log(`A payment error occurred: ${e.message}`);
-//         break;
-//       case "StripeInvalidRequestError":
-//         console.log("An invalid request occurred.");
-//         break;
-//       default:
-//         console.log("Another problem occurred, maybe unrelated to Stripe.");
-//         break;
-//     }
-//   }
-// });
 
 module.exports = stripeRoute;

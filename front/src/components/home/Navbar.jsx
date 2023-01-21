@@ -27,8 +27,9 @@ const Navbar = () => {
       // setCartQuantity(quantity);
     } else {
       setLoginUser(null);
+      navigate("/");
 
-      <Navigate replace to="/" />;
+      // <Navigate replace to="/" />;
     }
   }, [user, loginUser]);
 
@@ -39,7 +40,7 @@ const Navbar = () => {
 
   const onClick = useCallback(() => {
     user === null && navigate("/login");
-  });
+  }, [user]);
   const onClickHome = useCallback(() => {
     navigate("/");
   });

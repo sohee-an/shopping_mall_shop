@@ -16,6 +16,7 @@ const CartPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [discount, setDiscount] = useState(5000);
   const cartProduct = useSelector((state) => state.cart);
+  const userId = useSelector((state) => state.user.currentUser?._id);
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -30,9 +31,9 @@ const CartPage = () => {
       try {
         const res = await userRequest.post("checkout/payment", {
           tokenId: stripeToken.id,
-          amount: 500,
+          amount: cartProduct?.total - discount,
         });
-        console.log("payment res", res.data);
+
         navigate("/success", { state: { data: res.data } });
       } catch (err) {
         console.log(err);
@@ -63,21 +64,21 @@ const CartPage = () => {
         </Top>
         <Bottom>
           <Info>
-            {carts.products?.map((cartProduct) => {
+            {cartProduct.products?.map((cartProduct) => {
               return (
                 <Product>
                   <ProductDetail>
-                    <Image src={cartProduct.product.img} />
+                    <Image src={cartProduct.product?.img} />
                     <Details>
                       <ProductName>
                         <b>Product:</b>
-                        {cartProduct.product.title}
+                        {cartProduct.product?.title}
                       </ProductName>
                       <ProductId>
                         <b>ID:</b>
-                        {cartProduct.product._id}
+                        {cartProduct.product?._id}
                       </ProductId>
-                      <ProductColor color={cartProduct.color} />
+                      <ProductColor color={cartProduct?.color} />
                       <ProductSize>
                         <b>Size:</b>
                         {cartProduct?.size}
@@ -97,7 +98,7 @@ const CartPage = () => {
                         onClick={() => handleQuantity("aec")}
                       />
                     </ProductAmountContainer>
-                    <ProductPrice>{cartProduct.product.price}원</ProductPrice>
+                    <ProductPrice>{cartProduct.product?.price}원</ProductPrice>
                   </PriceDetail>
                 </Product>
               );
@@ -108,7 +109,7 @@ const CartPage = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>{carts?.total}원</SummaryItemPrice>
+              <SummaryItemPrice>{carts.total}원</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
@@ -116,7 +117,9 @@ const CartPage = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>{carts?.total - discount}원</SummaryItemPrice>
+              <SummaryItemPrice>
+                {cartProduct?.total - discount}원
+              </SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
               name="A.S.O Shop"
