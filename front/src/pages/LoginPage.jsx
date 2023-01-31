@@ -18,7 +18,6 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("hi");
 
     login(dispatch, { username, password });
   };

@@ -6,8 +6,6 @@ const stripe = require("stripe")(
 );
 
 stripeRoute.post("/payment", async (req, res) => {
-  console.log(req.body);
-  console.log(req.body.tokenId);
   const payment = await stripe.charges.create(
     {
       source: req.body.tokenId,
@@ -16,8 +14,6 @@ stripeRoute.post("/payment", async (req, res) => {
     },
     (stripeErr, stripeRes) => {
       if (stripeErr) {
-        console.log("err");
-        console.log(stripeErr);
         res.status(500).json(stripeErr);
       } else {
         console.log("success");

@@ -9,19 +9,10 @@ const SuccessPage = () => {
   const [successData, setSuccessData] = useState(false);
 
   console.log(state);
-  useEffect(() => {
-    state & setSuccessData(true);
-  });
+  // useEffect(() => {
+  //   state & setSuccessData(true);
+  // });
 
-  // useEffect(()=>{
-  //   if(state){
-  //     const postOrders=()=>{
-  //       try{
-  //         const res = userRequest.
-  //       }
-  //     }
-  //   }
-  // })
   return (
     <Container>
       <Wrapper>
@@ -29,7 +20,7 @@ const SuccessPage = () => {
         <Desc>성공적으로 상품이 주문되었습니다.</Desc>
         <LinkWrapper>
           <LinkStyle to="/">홈으로 가기</LinkStyle>
-          <LinkStyle to="/">주문내역 보러 가기 </LinkStyle>
+          <LinkStyle to="*">주문내역 보러 가기 </LinkStyle>
         </LinkWrapper>
       </Wrapper>
     </Container>

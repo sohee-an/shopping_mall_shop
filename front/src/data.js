@@ -30,20 +30,20 @@ export const categories = [
     id: 1,
     img: "https://img.freepik.com/free-photo/slender-girl-in-great-mood-is-having-fun-and-dancing-with-bag-in-her-hands-shot-of-italian-model-in-wrap-dress_197531-9980.jpg?w=1060&t=st=1672840601~exp=1672841201~hmac=db528ecb3c9e25223b4ac2ad319b3226ea134fa5f6f51ae7ca148064dc04934e",
     title: "SHIRT STYLE!",
-    cat: "women",
+    cat: "woman",
   },
 
   {
     id: 2,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr3zYLQuZKOpiL5ZgAlxYQyBWj2GMmAJ8_tg&usqp=CAU",
     title: "LOUNGEWEAR LOVE!",
-    cat: "coat",
+    cat: "man",
   },
   {
     id: 3,
     img: "https://img.freepik.com/free-photo/the-girl-holds-a-fashion-shopping-bag-and-beauty_1150-13673.jpg?w=2000",
     title: "LIGHT JACKET!",
-    cat: "jeans",
+    cat: "coat",
   },
 ];
 
