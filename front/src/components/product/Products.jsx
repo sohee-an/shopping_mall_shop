@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { publicRequest } from "../../requestMethod";
 import styled from "styled-components";
 
 import Product from "./product";
+
 export const SortType = {
   SORT: "newest",
   ASC: "asc",
@@ -13,8 +13,7 @@ export const SortType = {
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const filterContent = <p>찾으시는 제품이 없습니다.</p>;
-  console.log("filters:", filters);
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -32,7 +31,7 @@ const Products = ({ cat, filters, sort }) => {
 
   useEffect(() => {
     // cat && 필터를 적용한 상품들
-    if (filters && cat) {
+    if (cat) {
       setFilteredProducts(
         products.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
@@ -42,8 +41,6 @@ const Products = ({ cat, filters, sort }) => {
       );
     }
   }, [products, cat, filters]);
-
-  console.log("filteredProducts:", filteredProducts);
 
   //sort를 적용한 상품들
   useEffect(() => {
@@ -61,22 +58,30 @@ const Products = ({ cat, filters, sort }) => {
       );
     }
   }, [sort]);
-  if (filteredProducts.length > 0) {
-    filterContent = filteredProducts.map((product) => {
-      return <Product key={product.id} product={product} />;
-    });
+  // if (filteredProducts.length > 0) {
+  //   filterContent = filteredProducts.map((product) => {
+  //     return <Product key={product.id} product={product} />;
+  //   });
+  // }
+  if (cat) {
+    return (
+      <Container>
+        {filteredProducts.length !== 0 ? (
+          filteredProducts.map((product) => (
+            <Product product={product} key={product.id} />
+          ))
+        ) : (
+          <div>찾으시는 제품이 없습니다.</div>
+        )}
+      </Container>
+    );
   }
 
   return (
     <Container>
-      {cat
-        ? filterContent
-        : // ? filteredProducts.map((product) => {
-          //     return <Product key={product.id} product={product} />;
-          //   })
-          products.map((product) => (
-            <Product key={product.id} product={product} />
-          ))}
+      {products.map((prod) => (
+        <Product product={prod} key={prod.id} />
+      ))}
     </Container>
   );
 };

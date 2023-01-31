@@ -12,9 +12,10 @@ import { logOutCartAction } from "../../redux/cartRedux";
 
 const Navbar = () => {
   const [loginUser, setLoginUser] = useState(null);
-  // const [cartQuantity, setCartQuantity] = useState(0);
+
   const quantity = useSelector((state) => state.cart.quantity);
   const user = useSelector((state) => state.user.currentUser);
+
   console.log("qu", quantity);
 
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ const Navbar = () => {
     if (user !== null) {
       setLoginUser(user);
       dispatch(getAllCartAction(user?._id));
-      // setCartQuantity(quantity);
     } else {
       setLoginUser(null);
       navigate("/");
