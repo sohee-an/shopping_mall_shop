@@ -19,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAdminCheck) {
-      navigate("/");
+      navigate("/home");
     }
   }, [isAdminCheck, adminToken]);
 
@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginAdminAllAction({ username, password }))
       .then((originalPromiseResult) => {
-        navigate("/");
+        navigate("/home");
       })
       .catch((rejectedValueOrSerializedError) => {});
   };
