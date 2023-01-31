@@ -31,6 +31,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/login" element={<Login />} />
       </Routes>
       {admin && (
@@ -39,7 +40,7 @@ function App() {
           <div className="container">
             <Sidebar />
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route exact path="/home" element={<Home />} />
               <Route path="/users" element={<UserList />} />
               <Route path="/user/:userId" element={<User />} />
               <Route path="/newUser" element={<NewUser />} />
