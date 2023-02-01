@@ -1,6 +1,6 @@
 import "./widgetSm.css";
 import { Visibility } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { userRequest } from "../../requestMethods";
 
 export default function WidgetSm() {

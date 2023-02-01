@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsersAllAction } from "./actions/userActon";
+import { getAllUsersAllAction, deleteUserAction } from "./actions/userActon";
 
 const userSlice = createSlice({
   name: "user",
@@ -9,9 +9,9 @@ const userSlice = createSlice({
     error: false,
   },
   reducers: {
-    // logoutAction: (state) => {
-    //   state.currentUser = null;
-    // },
+    logoutUserAction: (state) => {
+      state.users = [];
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -20,14 +20,29 @@ const userSlice = createSlice({
         state.isFetching = true;
       })
       .addCase(getAllUsersAllAction.fulfilled, (state, action) => {
-        state.isFetching = true;
+        state.isFetching = false;
         state.users = action.payload.data;
       })
       .addCase(getAllUsersAllAction.rejected, (state, action) => {
         state.isFetching = true;
         state.error = action.error;
+      })
+      //delete
+      .addCase(deleteUserAction.pending, (state, action) => {
+        state.isFetching = true;
+      })
+      .addCase(deleteUserAction.fulfilled, (state, action) => {
+        state.isFetching = false;
+        state.users.splice(
+          state.users.findIndex((item) => item._id === action.payload.data._id),
+          1
+        );
+      })
+      .addCase(deleteUserAction.rejected, (state, action) => {
+        state.isFetching = true;
+        state.error = action.error;
       }),
 });
-export const { logoutAction } = userSlice.actions;
+export const { logoutUserAction } = userSlice.actions;
 
 export default userSlice.reducer;

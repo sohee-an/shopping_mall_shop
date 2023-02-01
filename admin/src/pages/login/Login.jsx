@@ -26,7 +26,9 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAdminAllAction({ username, password }))
+      .unwrap()
       .then((originalPromiseResult) => {
+        window.location.reload();
         navigate("/home");
       })
       .catch((rejectedValueOrSerializedError) => {});

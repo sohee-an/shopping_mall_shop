@@ -9,6 +9,7 @@ import {
   getProductsAllAction,
   deleteProductAction,
 } from "../../redux/actions/productAction";
+import { useCallback } from "react";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -18,9 +19,12 @@ export default function ProductList() {
     dispatch(getProductsAllAction());
   }, []);
 
-  const handleDelete = (id) => {
-    dispatch(deleteProductAction(id));
-  };
+  const handleDelete = useCallback(
+    (id) => {
+      dispatch(deleteProductAction(id));
+    },
+    [products]
+  );
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },

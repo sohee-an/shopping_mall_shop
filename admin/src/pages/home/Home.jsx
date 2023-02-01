@@ -4,7 +4,7 @@ import "./home.css";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useMemo, useState } from "react";
-import { publicRequest, userRequest } from "../../requestMethods";
+import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [userStats, setUserStats] = useState([]);
   const admin = useSelector((state) => state.admin.currentUser);
+  const TOKEN = admin?.accessToken;
 
   useEffect(() => {
     if (admin === null) {
@@ -40,7 +41,7 @@ export default function Home() {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await userRequest.get("/users/stats");
+        const res = await userRequest.get(`users/stats`);
 
         res.data.map((item) =>
           setUserStats((prev) => [

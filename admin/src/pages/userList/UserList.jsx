@@ -1,36 +1,41 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-
-import { userRequest } from "../../requestMethods";
 import { useEffect, useState } from "react";
+//state
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsersAllAction } from "../../redux/actions/userActon";
+import {
+  getAllUsersAllAction,
+  dele,
+  deleteUserAction,
+} from "../../redux/actions/userActon";
+import { useCallback } from "react";
 
 export default function UserList() {
-  const [data, setData] = useState(userRows);
   const dispatch = useDispatch();
   const usersRedux = useSelector((state) => state.user.users);
+  console.log("usersRedux", usersRedux);
   const [users, setUsers] = useState([]);
-  console.log("userRedux", usersRedux);
 
   useEffect(() => {
-    const getAllUsers = async () => {
-      try {
-        dispatch(getAllUsersAllAction());
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getAllUsers();
-    setUsers(usersRedux);
+    dispatch(getAllUsersAllAction())
+      .unwrap()
+      .then((originalPromiseResult) => {
+        console.log(originalPromiseResult);
+        setUsers(usersRedux);
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        console.log(rejectedValueOrSerializedError);
+      });
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  const handleDelete = useCallback(
+    (id) => {
+      dispatch(deleteUserAction(id));
+    },
+    [usersRedux, dispatch]
+  );
 
   const columns = [
     { field: "_id", headerName: "ID", width: 90 },
@@ -94,7 +99,7 @@ export default function UserList() {
   return (
     <div className="userList">
       <DataGrid
-        rows={users}
+        rows={usersRedux}
         disableSelectionOnClick
         getRowId={(row) => row._id}
         columns={columns}
