@@ -4,9 +4,10 @@ import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { logoutAction } from "../../redux/adminRedux";
+import { logoutUserAction } from "../../redux/userRedux";
 import { Navigate, useNavigate } from "react-router-dom";
 
-export default function Topbar() {
+const Topbar = () => {
   const user = useSelector((state) => state.admin.currentUser);
 
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ export default function Topbar() {
 
   const onClick = () => {
     dispatch(logoutAction());
+    dispatch(logoutUserAction());
   };
+
   useEffect(() => {
     if (user === null) {
       navigate("/login");
@@ -51,4 +54,5 @@ export default function Topbar() {
       </div>
     </div>
   );
-}
+};
+export default React.memo(Topbar);

@@ -89,6 +89,7 @@ export default function NewProduct() {
               size: size,
             };
             dispatch(addProductAction(product))
+              .unwrap()
               .then((originalPromiseResult) => {
                 navigate("/products");
               })

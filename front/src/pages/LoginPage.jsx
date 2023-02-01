@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { moblie } from "../responsive";
 import { login } from "../redux/apiCalls";
@@ -15,15 +15,14 @@ const LoginPage = () => {
     (state) => state.user
   );
   const user = useSelector((state) => state.user.currentUser);
+  useEffect(() => {
+    user && navigate("/home");
+  });
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     login(dispatch, { username, password });
-  };
-  user && navigate("/");
-  const onClick = () => {
-    console.log("click");
   };
 
   return (

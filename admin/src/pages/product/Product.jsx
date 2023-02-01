@@ -128,9 +128,9 @@ export default function Product() {
               productId: product._id,
             };
             dispatch(updateProductAction(product))
-              .unWrap()
+              .unwrap()
               .then((originalPromiseResult) => {
-                navigate(-1);
+                navigate("/products");
               })
               .catch((rejectedValueOrSerializedError) => {});
           });

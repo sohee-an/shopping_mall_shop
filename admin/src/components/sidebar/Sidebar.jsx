@@ -1,4 +1,5 @@
 import "./sidebar.css";
+import React from "react";
 import {
   LineStyle,
   Timeline,
@@ -15,7 +16,7 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -102,4 +103,5 @@ export default function Sidebar() {
       </div>
     </div>
   );
-}
+};
+export default React.memo(Sidebar);
