@@ -35,11 +35,11 @@ You may also see any lint errors in the console.
 - productDetail: 상품의 자세한 내용이 적혀있음, 상품의 수량 색깔을
   골라서 장바구니로 이동 가능함
   (navbar에서 장바구니에 넣은 상품 갯수를 알 수 있음)
-- 반응현으로 구현
+- 반응형으로 구현
 
 # Adimn
 
-- login: admin 자격이 있어야 메인 페이지를 볼 수 있음
+- login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
 
 - homePage
   /: 월별 사용자를 그래프로 볼 수 있음
