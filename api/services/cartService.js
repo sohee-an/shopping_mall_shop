@@ -18,8 +18,8 @@ class CartService {
   }
 
   //delete id로
-  async deletCart(cartId) {
-    const deleteCart = await this.cartModel.delete(cartId);
+  async deletCart(userId) {
+    const deleteCart = await this.cartModel.delete(userId);
     return deleteCart;
   }
 

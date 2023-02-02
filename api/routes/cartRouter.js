@@ -46,7 +46,8 @@ cartRouter.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
     const getCart = await cartService.getCart(req.params.id);
 
     if (getCart === null) {
-      res.status(201).json([]);
+      const noCart = [];
+      res.status(201).json(noCart);
     } else {
       res.status(201).json(getCart);
     }

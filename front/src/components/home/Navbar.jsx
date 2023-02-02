@@ -65,7 +65,7 @@ const Navbar = () => {
           {loginUser ? (
             <>
               <MenuItem>
-                <strong>{loginUser?.username}</strong>
+                <strong>{user?.username}</strong>
               </MenuItem>
               <MenuItem onClick={onClickLogOut}>LOG OUT</MenuItem>
             </>

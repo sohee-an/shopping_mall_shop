@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { Add, Remove } from "@mui/icons-material";
 import { moblie } from "../responsive";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { userRequest } from "../requestMethod";
+import { SuccessCartAction } from "../redux/actions/cart";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -18,6 +19,7 @@ const CartPage = () => {
   const cartProduct = useSelector((state) => state.cart);
   const userId = useSelector((state) => state.user.currentUser?._id);
   const cartQuantity = useSelector((state) => state.cart.quantity);
+  const dispatch = useDispatch();
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -25,7 +27,7 @@ const CartPage = () => {
 
   useEffect(() => {
     setCarts(cartProduct);
-  }, []);
+  }, [cartProduct]);
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -35,6 +37,9 @@ const CartPage = () => {
           amount: cartProduct?.total - discount,
         });
 
+        dispatch(SuccessCartAction(userId))
+          .unwrap()
+          .then((res) => console.log("a머냐"));
         navigate("/success", { state: { data: res.data } });
       } catch (err) {
         console.log(err);
@@ -213,6 +218,7 @@ const ProductDetail = styled.div`
 `;
 const Image = styled.img`
   width: 200px;
+  height: 150px;
 `;
 const ProductName = styled.div``;
 const ProductId = styled.div``;
