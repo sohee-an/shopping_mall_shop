@@ -38,8 +38,12 @@ You may also see any lint errors in the console.
 - 반응형으로 구현
 
 - 메인페이지들
+
+
 ![](shoppingMall_mainpage.gif)
+
 ![](shoppingMall_fillter.gif)
+
 ![](shoppingMall_order.gif)
 
 
