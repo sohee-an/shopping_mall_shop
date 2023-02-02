@@ -58,6 +58,8 @@ You may also see any lint errors in the console.
   /newproduct 로 가면 새로운 상품을 등록할 수 있음
   
   https://github.com/sohee-an/shopping_mall_shop/issues/16#issue-1567846754
+  
+  https://github.com/sohee-an/shopping_mall_shop/issues/17#issue-1567848867
 
 ## 나중에 추가할 기능
 
