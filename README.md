@@ -36,7 +36,7 @@ You may also see any lint errors in the console.
   골라서 장바구니로 이동 가능함
   (navbar에서 장바구니에 넣은 상품 갯수를 알 수 있음)
 - 반응형으로 구현
-
+https://github.com/sohee-an/shopping_mall_shop/issues/18#issue-1567851972
 # Adimn
 
 - login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
