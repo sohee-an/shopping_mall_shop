@@ -9,14 +9,12 @@ import {
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    //  currentUserId: null,
     products: [],
     quantity: 0,
     total: 0,
   },
   reducers: {
     logOutCartAction: (state, action) => {
-      // state.currentUserId = null;
       state.quantity = 0;
       state.products = [];
       state.total = 0;
