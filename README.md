@@ -37,6 +37,8 @@ You may also see any lint errors in the console.
   (navbar에서 장바구니에 넣은 상품 갯수를 알 수 있음)
 - 반응형으로 구현
 
+https://github.com/sohee-an/shopping_mall_shop/issues/22#issue-1567954892
+
 https://github.com/sohee-an/shopping_mall_shop/issues/21#issue-1567951015
 
 https://github.com/sohee-an/shopping_mall_shop/issues/19#issue-1567879790
