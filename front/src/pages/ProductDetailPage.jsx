@@ -31,7 +31,6 @@ const ProductDetailPage = () => {
     const getProduct = async () => {
       try {
         const res = await productApi.getPrdouctApi(product_id);
-        // console.log("res", res.data);
         setProductInfo(res.data);
         setUserTokenCheck(userToken);
       } catch (err) {
@@ -54,25 +53,22 @@ const ProductDetailPage = () => {
     if (userTokenCheck === null) {
       navigate("/login");
     }
-    if (color !== null && prevCart.products.length == 0) {
-      const total = quantity * productInfo.price;
+    if (color !== null && prevCart.products.length === 0) {
       dispatch(
-        addCartAction({ ...productInfo, quantity, color, size, userId, total })
+        addCartAction({ ...productInfo, quantity, color, size, userId })
       );
-      console.log("얍", ...productInfo);
-      //dispatch(addProduct({ ...product, quantity, color, size }));
     } else if (color !== null && prevCart.products.length > 0) {
       const prevCartProductArray = prevCart.products;
 
-      const total = quantity * productInfo.price;
       const product = productInfo._id;
+      const price = productInfo.price;
 
       dispatch(
         updateCartAction({
           userId: userId,
           updateproduct: [
             ...prevCartProductArray,
-            { product, quantity, color, size, total },
+            { product, quantity, color, size, price },
           ],
         })
       );

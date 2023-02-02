@@ -11,7 +11,7 @@ import { logOut } from "../../redux/userRedux";
 import { logOutCartAction } from "../../redux/cartRedux";
 
 const Navbar = () => {
-  const [loginUser, setLoginUser] = useState(null);
+  const [loginUser, setLoginUser] = useState(false);
 
   const quantity = useSelector((state) => state.cart.quantity);
   const user = useSelector((state) => state.user.currentUser);
@@ -23,24 +23,27 @@ const Navbar = () => {
 
   useEffect(() => {
     if (user !== null) {
-      setLoginUser(user);
+      setLoginUser(true);
       dispatch(getAllCartAction(user?._id));
-    } else {
-      setLoginUser(null);
-      navigate("/");
+      // } else {
+      //   setLoginUser(null);
+      //   navigate("/");
 
-      // <Navigate replace to="/" />;
+      //   // <Navigate replace to="/" />;
     }
-  }, [user, loginUser]);
+  }, [user, loginUser, quantity]);
 
   const onClickLogOut = useCallback(() => {
     dispatch(logOut());
     dispatch(logOutCartAction());
+    setLoginUser(false);
+    navigate("/");
   }, []);
 
   const onClick = useCallback(() => {
     user === null && navigate("/login");
   }, [user]);
+
   const onClickHome = useCallback(() => {
     navigate("/");
   });
@@ -59,7 +62,7 @@ const Navbar = () => {
           <Logo onClick={onClickHome}>A.S.O</Logo>
         </Center>
         <Right>
-          {loginUser !== null ? (
+          {loginUser ? (
             <>
               <MenuItem>
                 <strong>{loginUser?.username}</strong>

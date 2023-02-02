@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signUpAction } from "./actions/signup";
+import { signUpAction, loginAction } from "./actions/user";
 
 const userSlice = createSlice({
   name: "user",
@@ -10,19 +10,6 @@ const userSlice = createSlice({
     errorMessage: null,
   },
   reducers: {
-    loginStart: (state) => {
-      state.isFetching = true;
-    },
-    loginSuccess: (state, action) => {
-      state.isFetching = false;
-      state.currentUser = action.payload;
-      state.errorMessage = null;
-    },
-    loginFailure: (state, action) => {
-      state.isFetching = false;
-      state.error = true;
-      state.errorMessage = action.payload;
-    },
     logOut: (state) => {
       state.currentUser = null;
     },
@@ -32,9 +19,18 @@ const userSlice = createSlice({
 
       .addCase(signUpAction.pending, (state, action) => {})
       .addCase(signUpAction.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+        state.currentUser = action.payload.data;
       })
       .addCase(signUpAction.rejected, (state, action) => {
+        state.currentUser = null;
+        state.error = action.error;
+      })
+      //login
+      .addCase(loginAction.pending, (state, action) => {})
+      .addCase(loginAction.fulfilled, (state, action) => {
+        state.currentUser = action.payload.data;
+      })
+      .addCase(loginAction.rejected, (state, action) => {
         state.currentUser = null;
         state.error = action.error;
       })

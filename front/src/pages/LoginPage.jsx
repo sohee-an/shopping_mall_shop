@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { moblie } from "../responsive";
-import { login } from "../redux/apiCalls";
+//state
+
+import { loginAction } from "../redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -16,13 +18,13 @@ const LoginPage = () => {
   );
   const user = useSelector((state) => state.user.currentUser);
   useEffect(() => {
-    user && navigate("/home");
+    user && navigate("/");
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    login(dispatch, { username, password });
+    dispatch(loginAction({ username, password }));
+    //login(dispatch, { username, password });
   };
 
   return (
