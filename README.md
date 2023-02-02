@@ -38,13 +38,11 @@ You may also see any lint errors in the console.
 - 반응형으로 구현
 
 - 메인페이지들
-https://github.com/sohee-an/shopping_mall_shop/issues/22#issue-1567954892
+![](shoppingMall_mainpage.gif)
+![](shoppingMall_fillter.gif)
+![](shoppingMall_order.gif)
 
-https://github.com/sohee-an/shopping_mall_shop/issues/21#issue-1567951015
 
-https://github.com/sohee-an/shopping_mall_shop/issues/19#issue-1567879790
-
-https://github.com/sohee-an/shopping_mall_shop/issues/18#issue-1567851972
 # Adimn
 
 - login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
@@ -65,9 +63,9 @@ https://github.com/sohee-an/shopping_mall_shop/issues/18#issue-1567851972
   /product/:id : (edit버튼) 상품을 편집할수 있음
   /newproduct 로 가면 새로운 상품을 등록할 수 있음
   
-  https://github.com/sohee-an/shopping_mall_shop/issues/16#issue-1567846754
+  ![](admin-product.gif)
   
-  https://github.com/sohee-an/shopping_mall_shop/issues/17#issue-1567848867
+  ![](adminPage-user.gif)
 
 ## 나중에 추가할 기능
 
