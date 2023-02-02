@@ -56,6 +56,8 @@ You may also see any lint errors in the console.
   제품을 삭제할 수 있음(db에서 삭제됨)
   /product/:id : (edit버튼) 상품을 편집할수 있음
   /newproduct 로 가면 새로운 상품을 등록할 수 있음
+  
+  https://github.com/sohee-an/shopping_mall_shop/issues/16#issue-1567846754
 
 ## 나중에 추가할 기능
 
