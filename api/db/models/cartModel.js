@@ -19,8 +19,8 @@ class CartModel {
     return updatedCart;
   }
   //delete
-  async delete(cartId) {
-    const deletedCart = await Cart.findByIdAndDelete(cartId);
+  async delete(userId) {
+    const deletedCart = await Cart.deleteOne({ userId: userId });
     return deletedCart;
   }
   //get user cart

@@ -22,7 +22,7 @@ const getAllCartAction = createAsyncThunk(
   "/carts/getAll",
   async (userId, thunkAPI) => {
     const res = await userRequest.get(`carts/find/${userId}`);
-
+    console.log("되나", res.data);
     return res;
   }
 );
@@ -38,4 +38,17 @@ const updateCartAction = createAsyncThunk(
   }
 );
 
-module.exports = { addCartAction, getAllCartAction, updateCartAction };
+const SuccessCartAction = createAsyncThunk(
+  "/carts/success",
+  async (userId, thunkAPI) => {
+    const res = await userRequest.delete(`carts/${userId}`);
+    return res;
+  }
+);
+
+module.exports = {
+  addCartAction,
+  getAllCartAction,
+  updateCartAction,
+  SuccessCartAction,
+};
