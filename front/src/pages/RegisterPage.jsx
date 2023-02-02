@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { moblie } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpAction } from "../redux/actions/signup";
+import { signUpAction } from "../redux/actions/user";
 import { useNavigate, Navigate } from "react-router-dom";
 
 const RegisterPage = () => {

@@ -13,6 +13,7 @@ class CartService {
   //update
   async updateCart(userId, updateCart) {
     const updatedCart = await this.cartModel.updateCart(userId, updateCart);
+
     return updatedCart;
   }
 
@@ -25,8 +26,6 @@ class CartService {
   //get user cart
   async getCart(userId) {
     const getCart = await this.cartModel.getCart(userId);
-    console.log("servicegetCart", getCart);
-    //const productArray = getCart.products;
 
     return getCart;
   }

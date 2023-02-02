@@ -12,7 +12,8 @@ const ProductSchema = new Schema(
     price: { type: Number, required: true },
     inStock: { type: Boolean, default: true },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { collection: "products" }
 );
 
 module.exports = ProductSchema;

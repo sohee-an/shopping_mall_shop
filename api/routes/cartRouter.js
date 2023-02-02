@@ -11,6 +11,7 @@ const {
 cartRouter.post("/", verifyToken, async (req, res) => {
   try {
     const saveCart = await cartService.saveCart(req.body);
+
     res.status(200).json(saveCart);
   } catch (err) {
     res.status(500).json(err);
@@ -21,7 +22,7 @@ cartRouter.post("/", verifyToken, async (req, res) => {
 cartRouter.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const updateCart = await cartService.updateCart(req.params.id, req.body);
-    res.status(201).json(updateCart);
+    res.status(201).json("장바구니에 성공적으로 들어갔습니다.");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -43,10 +44,12 @@ cartRouter.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 cartRouter.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const getCart = await cartService.getCart(req.params.id);
-    const getCartProducts = getCart.products;
-    console.log("getCartRouter", getCartProducts);
 
-    res.status(201).json(getCartProducts);
+    if (getCart === null) {
+      res.status(201).json([]);
+    } else {
+      res.status(201).json(getCart);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

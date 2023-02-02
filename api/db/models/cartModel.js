@@ -16,7 +16,6 @@ class CartModel {
       { $set: { products: updateCart } },
       { new: true }
     );
-
     return updatedCart;
   }
   //delete

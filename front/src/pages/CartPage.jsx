@@ -17,6 +17,7 @@ const CartPage = () => {
   const [discount, setDiscount] = useState(5000);
   const cartProduct = useSelector((state) => state.cart);
   const userId = useSelector((state) => state.user.currentUser?._id);
+  const cartQuantity = useSelector((state) => state.cart.quantity);
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -57,7 +58,7 @@ const CartPage = () => {
         <Top>
           <TopButton onClick={() => navigate("/")}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag({cartQuantity})</TopText>
             <TopText>Your Wishlist</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKKOUT NOW</TopButton>
