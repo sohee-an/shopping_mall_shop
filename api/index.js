@@ -23,7 +23,6 @@ const productRouter = require("./routes/productRouter");
 const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRouter");
 const stripeRoute = require("./routes/stripe");
-const morgan = require("morgan");
 
 // dotenv.config({ origin: "http://localhost:3000", credentials: true });
 
