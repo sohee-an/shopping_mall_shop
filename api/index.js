@@ -37,12 +37,12 @@ app.listen(process.env.PORT || 5000, () => {
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "ASO_shoppingMall"],
+    origin: ["http://localhost:3000", "ASO_shoppingMall", "http://3.35.139.21"],
     credentials: true,
   })
 );
 app.use(express.json());
-//app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.send("hellow myshoppingMall");
 });
@@ -53,6 +53,6 @@ app.use("/api/carts", cartRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/checkout", stripeRoute);
 
-// app.get("*", (req, res, next) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
+app.get("*", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
