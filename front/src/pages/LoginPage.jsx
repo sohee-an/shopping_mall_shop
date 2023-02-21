@@ -23,7 +23,13 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginAction({ username, password }));
+    dispatch(loginAction({ username, password }))
+      .unwrap()
+      .then((originalPromiseResult) => {
+        navigate("/");
+        window.location.replace("/");
+      })
+      .catch((rejectedValueOrSerializedError) => {});
     //login(dispatch, { username, password });
   };
 
