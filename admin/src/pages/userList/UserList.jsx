@@ -15,7 +15,7 @@ import { useCallback } from "react";
 export default function UserList() {
   const dispatch = useDispatch();
   const usersRedux = useSelector((state) => state.user.users);
-  console.log("usersRedux", usersRedux);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

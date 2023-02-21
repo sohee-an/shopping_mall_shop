@@ -23,7 +23,7 @@ export default function User() {
       try {
         const res = await userRequest.get(`users/find/${userId}`);
         setUser(res.data);
-        console.log("res", res.data);
+        // console.log("res", res.data);
       } catch (err) {
         console.log(err);
       }

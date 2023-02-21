@@ -5,7 +5,6 @@ const Order = model("order", OrderSchema);
 
 class OrderModel {
   async saveOrder(userInfoOrder) {
-    console.log(userInfoOrder);
     const saveOrder = await Order.create(userInfoOrder);
 
     return saveOrder;
@@ -58,7 +57,7 @@ class OrderModel {
         },
       },
     ]);
-    console.log(income);
+
     return income;
   }
 }

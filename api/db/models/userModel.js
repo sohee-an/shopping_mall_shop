@@ -5,9 +5,8 @@ const User = model("user", UserSchema);
 
 class UserModel {
   async create(userInfo) {
-    console.log("userInfo", userInfo);
     const saveUser = await User.create(userInfo);
-    console.log(saveUser);
+
     return saveUser;
   }
   async findUser(username) {
