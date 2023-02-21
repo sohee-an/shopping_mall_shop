@@ -26,4 +26,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 ASO_shoppingMall.pem
-node_modules
+./node_modules
+
