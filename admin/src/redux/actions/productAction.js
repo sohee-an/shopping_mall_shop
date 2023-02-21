@@ -31,7 +31,7 @@ const updateProductAction = createAsyncThunk(
   "/product/updateProduct",
   async ({ productId, ...updateProduct }, thunkAPI) => {
     const res = await userRequest.put(`/products/${productId}`, updateProduct);
-    console.log(res.data);
+
     return res;
   }
 );

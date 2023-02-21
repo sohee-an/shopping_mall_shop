@@ -1,32 +1,35 @@
 const { createAsyncThunk } = require("@reduxjs/toolkit");
 const { userRequest, publicRequest } = require("../../requestMethod");
 
-const addCartAction = createAsyncThunk("/carts/add", async (data, thunkAPI) => {
-  console.log("datata", data);
-  const res = await userRequest.post("/carts", {
-    userId: data.userId,
-    products: [
-      {
-        product: data._id,
-        color: data.color,
-        size: data.size,
-        price: data.price,
-      },
-    ],
-  });
+export const addCartAction = createAsyncThunk(
+  "/carts/add",
+  async (data, thunkAPI) => {
+    // console.log("datata", data);
+    const res = await userRequest.post("/carts", {
+      userId: data.userId,
+      products: [
+        {
+          product: data._id,
+          color: data.color,
+          size: data.size,
+          price: data.price,
+        },
+      ],
+    });
 
-  return res;
-});
-
-const getAllCartAction = createAsyncThunk(
-  "/carts/getAll",
-  async (userId, thunkAPI) => {
-    const res = await userRequest.get(`carts/find/${userId}`);
-    console.log("되나", res.data);
     return res;
   }
 );
-const updateCartAction = createAsyncThunk(
+
+export const getAllCartAction = createAsyncThunk(
+  "/carts/getAll",
+  async (userId, thunkAPI) => {
+    const res = await userRequest.get(`carts/find/${userId}`);
+    // console.log("되나", res.data);
+    return res;
+  }
+);
+export const updateCartAction = createAsyncThunk(
   "/carts/update",
   async (data, thunkAPI) => {
     const res = await userRequest.put(
@@ -38,7 +41,7 @@ const updateCartAction = createAsyncThunk(
   }
 );
 
-const SuccessCartAction = createAsyncThunk(
+export const SuccessCartAction = createAsyncThunk(
   "/carts/success",
   async (userId, thunkAPI) => {
     const res = await userRequest.delete(`carts/${userId}`);
@@ -46,9 +49,9 @@ const SuccessCartAction = createAsyncThunk(
   }
 );
 
-module.exports = {
-  addCartAction,
-  getAllCartAction,
-  updateCartAction,
-  SuccessCartAction,
-};
+// module.exports = {
+//   addCartAction,
+//   getAllCartAction,
+//   updateCartAction,
+//   SuccessCartAction,
+// };

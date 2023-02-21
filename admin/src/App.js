@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     adminRedux && setAdmin(adminRedux);
   }, [adminRedux]);
-  console.log("admin", admin);
+  // console.log("admin", admin);
 
   return (
     <Router>

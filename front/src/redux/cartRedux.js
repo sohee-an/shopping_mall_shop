@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addCartAction,
-  getAllCartAction,
   updateCartAction,
   SuccessCartAction,
+  getAllCartAction as getAllCartAction,
 } from "./actions/cart";
 
 const cartSlice = createSlice({
