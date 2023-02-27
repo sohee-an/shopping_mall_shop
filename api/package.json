@@ -8,7 +8,7 @@
     "aws-front": "cd ../front && npm ci && npm run build && cd ../",
     "aws-api": "cd ../api && npm ci ",
     "aws-prebuild": "npm run aws-front && npm run aws-api && move ../front/build ../api",
-    "start": " node index.js"
+    "start": " cross-env NODE_ENV=production pm2 start index.js"
   },
   "keywords": [],
   "author": "",
