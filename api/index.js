@@ -42,10 +42,10 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/", (req, res) => {
-  res.send("hellow myshoppingMall");
-});
+app.use(express.static(path.join(__dirname, "build")));
+// app.get("/", (req, res) => {
+//   res.send("hellow myshoppingMall");
+// });
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
@@ -54,5 +54,5 @@ app.use("/api/orders", orderRouter);
 app.use("/api/checkout", stripeRoute);
 
 app.get("*", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
