@@ -51,6 +51,7 @@ You may also see any lint errors in the console.
 
  - stripe를 통해 결제를 구현함 
  - 실제로 결제 후에 성공하면 성공페이지로 넘어감
+ - 유저가 쇼핑을 더 할지 아니면 결제를 할지 선택할 수 있음
 
 ![](shoppingMall_order.gif)
 
@@ -61,7 +62,7 @@ You may also see any lint errors in the console.
 
 - homePage
   /: 월별 사용자를 그래프로 볼 수 있음
-  최근 사용자를 볼 수 있음( 인원수 조정 가능 현제 5명 )
+  최근 사용자를 볼 수 있음( 인원수 조정 가능 현재는 5명으로 조정함 )
   주문 내역을 확인할 수 있음
   Revanue : 이번달과 작년달의 매출을 확인할 수 있음
 
