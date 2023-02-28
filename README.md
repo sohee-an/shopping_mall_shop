@@ -74,7 +74,7 @@ You may also see any lint errors in the console.
   제품들을 한번에 다 확인할 수 있음
   제품을 삭제할 수 있음(db에서 삭제됨)
   /product/:id : (edit버튼) 상품을 편집할수 있음
-  /newproduct 로 가면 새로운 상품을 등록할 수 있음
+  /newproduct 로 가면 새로운 상품을 등록할 수 있음(firebase사용)
   
   ![](admin-product.gif)
   
