@@ -31,6 +31,7 @@ You may also see any lint errors in the console.
   (navbar에서 장바구니에 넣은 상품 갯수를 알 수 있음)
 
 - 반응형으로 구현
+
   ![](반응형.gif)
 
 - 메인페이지들
