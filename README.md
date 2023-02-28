@@ -45,6 +45,7 @@ You may also see any lint errors in the console.
 - 필터를 통해 카테코리,사이즈별로 제품을 볼 수 있음 
 - 가격이 높은 순서, 낮은 순서  등으로 제품을 볼 수 있음
 - 클릭시 제품 상세페이지로 감
+- 제품의 색상은 좀 더 시각화가 잘 될수 있게 색깔로 표현함 
 
 ![](shoppingMall_fillter.gif)
 
