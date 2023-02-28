@@ -48,6 +48,9 @@ You may also see any lint errors in the console.
 
 ![](shoppingMall_fillter.gif)
 
+ - stripe를 통해 결제를 구현함 
+ - 실제로 결제 후에 성공하면 성공페이지로 넘어감
+
 ![](shoppingMall_order.gif)
 
 
@@ -72,6 +75,7 @@ You may also see any lint errors in the console.
   /newproduct 로 가면 새로운 상품을 등록할 수 있음
   
   ![](admin-product.gif)
+  
   
   ![](adminPage-user.gif)
 
