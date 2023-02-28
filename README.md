@@ -7,10 +7,10 @@
   npm i
   npm start
 
--front
-cd front
-npm i
-npm start
+- front
+  cd front
+  npm i
+  npm start
 
 ### `기술 스택`
 
