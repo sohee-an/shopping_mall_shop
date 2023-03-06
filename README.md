@@ -13,8 +13,7 @@ You may also see any lint errors in the console.
 - node.js
 - styled-components
 - axios
-- redux
-- reduxjs/toolkit
+- redux-toolkit
 - react-stripe-checkout
 - firebase
 
