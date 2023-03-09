@@ -51,13 +51,13 @@ You may also see any lint errors in the console.
 
 # Adimn
 
-## login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
+## login: admin 자격이 있어야 메인 페이지를 볼 수 있음
 
 ## homePage
-  /: 월별 사용자를 그래프로 볼 수 있음
-  최근 사용자를 볼 수 있음( 인원수 조정 가능 현재는 5명으로 조정함 )
-  주문 내역을 확인할 수 있음
-- Revanue : 이번달과 작년달의 매출을 확인할 수 있음
+ - /: 월별 사용자를 그래프로 볼 수 있음
+ - 최근 사용자를 볼 수 있음( 인원수 조정 가능 현재는 5명으로 조정함 )
+ - 주문 내역을 확인할 수 있음
+ - Revanue : 이번달과 작년달의 매출을 확인할 수 있음
 
 ## userPage
  - /user : user 목록을 한번에 볼수 있음
