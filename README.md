@@ -51,23 +51,24 @@ You may also see any lint errors in the console.
 
 # Adimn
 
-- login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
+##login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
 
-- homePage
+## homePage
   /: 월별 사용자를 그래프로 볼 수 있음
   최근 사용자를 볼 수 있음( 인원수 조정 가능 현재는 5명으로 조정함 )
   주문 내역을 확인할 수 있음
 - Revanue : 이번달과 작년달의 매출을 확인할 수 있음
 
-- userPage
-  /user : user 목록을 한번에 볼수 있음
-  /user/:userId:(edit버튼) user의 자세한 정보를 볼수 있음, 개인정보 업데이트 가능
+## userPage
+ - /user : user 목록을 한번에 볼수 있음
+ - /user/:userId: user의 자세한 정보를 볼수 있음, 개인정보 업데이트도 가능함
+  
 
-- Products
-  제품들을 한번에 다 확인할 수 있음
-  제품을 삭제할 수 있음(db에서 삭제됨)
-  /product/:id : (edit버튼) 상품을 편집할수 있음
-  /newproduct 로 가면 새로운 상품을 등록할 수 있음(firebase사용)
+## Products
+  - 제품들을 한번에 다 확인할 수 있음
+  - 제품을 삭제할 수 있음(db에서 삭제됨)
+  - /product/:id :  가격 등 상품을 편집할수 있음
+  - /newproduct 로 가면 새로운 상품을 등록할 수 있음(firebase사용)
 
   ![](admin-product.gif)
 
