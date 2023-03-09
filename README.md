@@ -51,7 +51,7 @@ You may also see any lint errors in the console.
 
 # Adimn
 
-##login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
+## login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
 
 ## homePage
   /: 월별 사용자를 그래프로 볼 수 있음
