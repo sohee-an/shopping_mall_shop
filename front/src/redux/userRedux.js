@@ -19,7 +19,7 @@ const userSlice = createSlice({
 
       .addCase(signUpAction.pending, (state, action) => {})
       .addCase(signUpAction.fulfilled, (state, action) => {
-        state.currentUser = action.payload.data;
+        state.currentUser = action.payload;
       })
       .addCase(signUpAction.rejected, (state, action) => {
         state.currentUser = null;
@@ -28,7 +28,7 @@ const userSlice = createSlice({
       //login
       .addCase(loginAction.pending, (state, action) => {})
       .addCase(loginAction.fulfilled, (state, action) => {
-        state.currentUser = action.payload.data;
+        state.currentUser = action.payload;
       })
       .addCase(loginAction.rejected, (state, action) => {
         state.currentUser = null;

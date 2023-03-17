@@ -8,7 +8,7 @@ import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+function Home() {
   const navigate = useNavigate();
   const [userStats, setUserStats] = useState([]);
   const admin = useSelector((state) => state.admin.currentUser);
@@ -72,3 +72,4 @@ export default function Home() {
     </div>
   );
 }
+export default Home;

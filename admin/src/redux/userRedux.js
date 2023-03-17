@@ -21,7 +21,7 @@ const userSlice = createSlice({
       })
       .addCase(getAllUsersAllAction.fulfilled, (state, action) => {
         state.isFetching = false;
-        state.users = action.payload.data;
+        state.users = action.payload;
       })
       .addCase(getAllUsersAllAction.rejected, (state, action) => {
         state.isFetching = true;
@@ -34,7 +34,7 @@ const userSlice = createSlice({
       .addCase(deleteUserAction.fulfilled, (state, action) => {
         state.isFetching = false;
         state.users.splice(
-          state.users.findIndex((item) => item._id === action.payload.data._id),
+          state.users.findIndex((item) => item._id === action.payload._id),
           1
         );
       })

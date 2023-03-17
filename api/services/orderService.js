@@ -40,6 +40,10 @@ class OrderService {
       previousMonth,
       productId
     );
+    console.log(previousMonth, productId);
+    console.log("!!!!!!!!!");
+    console.log(incomeOrders);
+
     return incomeOrders;
   }
 }

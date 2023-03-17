@@ -37,7 +37,7 @@ app.listen(process.env.PORT || 5000, () => {
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "ASO_shoppingMall", "http://3.35.139.21"],
+    origin: ["http://localhost:3000", "http://3.35.139.21"],
     credentials: true,
   })
 );

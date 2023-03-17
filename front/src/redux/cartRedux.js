@@ -25,10 +25,10 @@ const cartSlice = createSlice({
       .addCase(getAllCartAction.pending, (state, action) => {})
       .addCase(getAllCartAction.fulfilled, (state, action) => {
         if (action.payload.data.length === 0) {
-          state.products = action.payload.data;
+          state.products = action.payload;
         } else {
           //state.currentUserId = action.payload.data.userId;
-          state.products = action.payload.data.products;
+          state.products = action.payload.products;
           state.quantity = state.products.length;
           state.total = state.products.reduce((total, el) => {
             return total + el.price;
@@ -40,7 +40,7 @@ const cartSlice = createSlice({
       //add
       .addCase(addCartAction.pending, (state, action) => {})
       .addCase(addCartAction.fulfilled, (state, action) => {
-        state.products.push(action.payload.data.products);
+        state.products.push(action.payload.products);
         state.quantity += 1;
       })
       .addCase(addCartAction.rejected, (state, action) => {})

@@ -52,7 +52,7 @@ export default function Product() {
     const getStats = async () => {
       try {
         const res = await userRequest.get("orders/income?pid=" + productId);
-
+        console.log(res);
         const list = res.data.sort((a, b) => {
           return a._id - b._id;
         });
