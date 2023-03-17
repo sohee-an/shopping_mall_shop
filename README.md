@@ -15,6 +15,7 @@ npm start
 ### `기술 스택`
 
 - node.js
+- express
 - styled-components
 - axios
 - redux-toolkit
@@ -92,6 +93,9 @@ npm start
   ![](admin-product.gif)
 
   ![](adminPage-user.gif)
+  
+ ### 백엔드 
+ api.md에 적어놓음
 
 ## 나중에 추가할 기능
 
