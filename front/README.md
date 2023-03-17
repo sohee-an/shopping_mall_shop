@@ -14,6 +14,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+- 관리자 로그인: id:admin , password:12345
+
 ### `기술 스택`
 
 - node.js
@@ -38,6 +40,7 @@ You may also see any lint errors in the console.
 - 반응현으로 구현
 
 # Adimn
+
 
 - login: admin 자격이 있어야 메인 페이지를 볼 수 있음
 
