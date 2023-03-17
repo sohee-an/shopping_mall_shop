@@ -4,9 +4,9 @@ const { userRequest, publicRequest } = require("../../requestMethods");
 const getProductsAllAction = createAsyncThunk(
   "/product/getAll",
   async (thunkAPI) => {
-    const res = await publicRequest.get("/products");
-
-    return res;
+    const res = await userRequest.get("/products");
+    console.log("res", res);
+    return res.data;
   }
 );
 //add
@@ -14,7 +14,7 @@ const addProductAction = createAsyncThunk(
   "/product/add",
   async (updateProduct, thunkAPI) => {
     const res = await userRequest.post(`/products`, updateProduct);
-    return res;
+    return res.data;
   }
 );
 
@@ -23,7 +23,7 @@ const deleteProductAction = createAsyncThunk(
   async (productId, thunkAPI) => {
     const res = await userRequest.delete(`/products/${productId}`);
     // const res = { _id: `${productId}` };
-    return res;
+    return res.data;
   }
 );
 // update
@@ -32,7 +32,7 @@ const updateProductAction = createAsyncThunk(
   async ({ productId, ...updateProduct }, thunkAPI) => {
     const res = await userRequest.put(`/products/${productId}`, updateProduct);
 
-    return res;
+    return res.data;
   }
 );
 

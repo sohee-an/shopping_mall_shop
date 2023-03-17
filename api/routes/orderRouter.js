@@ -70,11 +70,13 @@ orderRouter.get("/income", verifyTokenAndAdmin, async (req, res) => {
   const productId = req.query.productId;
   const date = new Date();
   //이번 달과 이 이전 달 수입
-  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(date.setMonth(date.getMonth() - 2));
-  // const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+  // const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+  // const previousMonth = new Date(date.setMonth(date.getMonth() - 2));
+
   // console.log("last", lastMonth);
   // console.log("prev", previousMonth);
+  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
   try {
     const income = await orderService.findStatsOrder(previousMonth, productId);

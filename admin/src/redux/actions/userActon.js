@@ -5,7 +5,7 @@ const getAllUsersAllAction = createAsyncThunk(
   "/user/allUsers",
   async (thunkAPI) => {
     const res = await userRequest.get("/users");
-    return res;
+    return res.data;
   }
 );
 
@@ -15,7 +15,7 @@ const deleteUserAction = createAsyncThunk(
   async (id, thunkAPI) => {
     const res = await userRequest.delete(`/users/${id}`);
 
-    return res;
+    return res.data;
   }
 );
 module.exports = {

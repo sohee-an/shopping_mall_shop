@@ -1,12 +1,16 @@
 # shopping_mall_shop APP
 
-### `npm start`
+### 실행
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- back
+  cd api
+  npm i
+  npm start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-front
+cd front
+npm i
+npm start
 
 ### `기술 스택`
 
@@ -53,7 +57,7 @@ You may also see any lint errors in the console.
 
 # Adimn
 
-- login: admin 자격이 있어야 메인 페이지를 볼 수 있음(id:admin,password:12345)
+- login: admin 자격이 있어야 메인 페이지를 볼 수 있음
 
 - homePage
   /: 월별 사용자를 그래프로 볼 수 있음
@@ -63,11 +67,23 @@ You may also see any lint errors in the console.
 
 - userPage
   /user : user 목록을 한번에 볼수 있음
+
+  ![](userList.png)
+
   /user/:userId:(edit버튼) user의 자세한 정보를 볼수 있음, 개인정보 업데이트 가능
+
+  ![](userDetail.png)
 
 - Products
   제품들을 한번에 다 확인할 수 있음
-  제품을 삭제할 수 있음(db에서 삭제됨)
+  제품을 추가 삭제할 수 있음
+
+  ![](productList.png)
+
+  상품 상세페이지
+
+  ![](productDetail.png)
+
   /product/:id : (edit버튼) 상품을 편집할수 있음
   /newproduct 로 가면 새로운 상품을 등록할 수 있음(firebase사용)
 

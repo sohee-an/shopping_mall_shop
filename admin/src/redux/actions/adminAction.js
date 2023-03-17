@@ -6,7 +6,7 @@ const loginAdminAllAction = createAsyncThunk(
   async (adminUser, thunkAPI) => {
     const res = await publicRequest.post("auth/login", adminUser);
 
-    return res;
+    return res.data;
   }
 );
 

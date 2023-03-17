@@ -21,7 +21,7 @@ const adminSlice = createSlice({
       })
       .addCase(loginAdminAllAction.fulfilled, (state, action) => {
         state.isFetching = false;
-        state.currentUser = action.payload.data;
+        state.currentUser = action.payload;
       })
       .addCase(loginAdminAllAction.rejected, (state, action) => {
         state.isFetching = true;

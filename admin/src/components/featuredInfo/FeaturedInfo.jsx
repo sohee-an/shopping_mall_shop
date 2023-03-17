@@ -7,13 +7,13 @@ export default function FeaturedInfo() {
   const [income, setIncome] = useState({});
   const [perc, setPerc] = useState(0);
 
-  /* 이번달과 이전 달 비교 */
+  /**이번달과 이전 달 비교 */
   useEffect(() => {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("orders/income");
         setIncome(res.data);
-
+        console.log(res.data);
         setPerc((res.data[1].total * 100) / res.data[0].total - 100);
       } catch (err) {
         console.log(err);

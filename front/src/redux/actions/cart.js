@@ -17,7 +17,7 @@ export const addCartAction = createAsyncThunk(
       ],
     });
 
-    return res;
+    return res.data;
   }
 );
 
@@ -26,7 +26,7 @@ export const getAllCartAction = createAsyncThunk(
   async (userId, thunkAPI) => {
     const res = await userRequest.get(`carts/find/${userId}`);
     // console.log("되나", res.data);
-    return res;
+    return res.data;
   }
 );
 export const updateCartAction = createAsyncThunk(
@@ -37,7 +37,7 @@ export const updateCartAction = createAsyncThunk(
       data.updateproduct
     );
 
-    return res;
+    return res.data;
   }
 );
 
@@ -45,7 +45,7 @@ export const SuccessCartAction = createAsyncThunk(
   "/carts/success",
   async (userId, thunkAPI) => {
     const res = await userRequest.delete(`carts/${userId}`);
-    return res;
+    return res.data;
   }
 );
 

@@ -23,7 +23,7 @@ export const productSlice = createSlice({
       })
       .addCase(getProductsAllAction.fulfilled, (state, action) => {
         state.isFetching = false;
-        state.products = action.payload.data;
+        state.products = action.payload;
       })
       .addCase(getProductsAllAction.rejected, (state, action) => {
         state.isFetching = false;
@@ -36,9 +36,7 @@ export const productSlice = createSlice({
       .addCase(deleteProductAction.fulfilled, (state, action) => {
         state.isFetching = false;
         state.products.splice(
-          state.products.findIndex(
-            (item) => item._id === action.payload.data._id
-          ),
+          state.products.findIndex((item) => item._id === action.payload._id),
           1
         );
       })
@@ -53,9 +51,7 @@ export const productSlice = createSlice({
       .addCase(updateProductAction.fulfilled, (state, action) => {
         state.isFetching = false;
         state.products[
-          state.products.findIndex(
-            (item) => item._id === action.payload.data._id
-          )
+          state.products.findIndex((item) => item._id === action.payload._id)
         ] = action.payload.data;
       })
       .addCase(updateProductAction.rejected, (state, action) => {
@@ -65,7 +61,7 @@ export const productSlice = createSlice({
       //add
       .addCase(addProductAction.pending, (state, action) => {})
       .addCase(addProductAction.fulfilled, (state, action) => {
-        state.products.push(action.payload.data);
+        state.products.push(action.payload);
       })
       .addCase(addProductAction.rejected, (state, action) => {
         state.error = action.error;
