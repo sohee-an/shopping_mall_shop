@@ -1,16 +1,6 @@
 # shopping_mall_shop APP
 
-### 실행
 
-- back
-  cd api
-  npm i
-  npm start
-
--front
-cd front
-npm i
-npm start
 
 # ✨서비스 소개
 
@@ -52,6 +42,19 @@ npm start
 
 <br>
 <br>
+
+## 실행 방법 
+    back cd api 
+    npm i 
+    npm start
+    
+    
+    front cd front 
+    npm i 
+    npm start
+    
+    
+    
 
 # 사용자
 
