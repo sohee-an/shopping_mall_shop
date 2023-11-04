@@ -1,7 +1,3 @@
-# shopping_mall_shop APP
-
-
-
 # ✨서비스 소개
 
 ## shopping-mall-shop
