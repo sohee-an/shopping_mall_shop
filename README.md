@@ -43,16 +43,7 @@
 <br>
 <br>
 
-# 실행 방법 
-    back cd api 
-    npm i 
-    npm start
-    
-    
-    front cd front 
-    npm i 
-    npm start
-    
+
     
     
 
