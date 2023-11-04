@@ -13,7 +13,6 @@
 </div>
 
 
-
 <br>
 <br>
 
@@ -29,7 +28,7 @@
 <img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
 <img src="https://img.shields.io/badge/reduxToolkit-007?style=for-the-badge&logo=redux-toolkit&logoColor=white">
 <img src="https://img.shields.io/badge/firebase-007FF?style=for-the-badge&logo=firebase&logoColor=white">
-   
+</div>   
 <br>
 <br>
 - reducx-toolkit, firebase를  공부하기 위해서 쇼핑몰 프로젝트를 진행하였습니다. 
