@@ -12,19 +12,47 @@ cd front
 npm i
 npm start
 
-### `기술 스택`
+# ✨서비스 소개
 
-- node.js
-- express
-- styled-components
-- axios
-- redux-toolkit
-- react-stripe-checkout
-- firebase
+## shopping-mall-shop
 
-- DB: MongoDB
+<div align="middle">
 
-### 프로젝트 설명 & 서비스
+
+
+![image.png](https://hackmd.io/_uploads/ByAkwtm7p.png)
+    
+
+
+    
+</div>
+
+
+
+<br>
+<br>
+
+# ⚙ 기술스택
+
+<div align="middle">
+
+<img src="https://img.shields.io/badge/Javascript-3178C6?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
+<img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+<img src="https://img.shields.io/badge/StyledComponent-C43BAD?style=for-the-badge&logo=styled-component&logoColor=white">
+<img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
+    <img src="https://img.shields.io/badge/reduxToolkit-007?style=for-the-badge&logo=redux-toolkit&logoColor=white">
+     <img src="https://img.shields.io/badge/firebase-007FF?style=for-the-badge&logo=firebase&logoColor=white">
+   
+<br>
+<br>
+- reducx-toolkit, firebase를  공부하기 위해서 쇼핑몰 프로젝트를 진행하였습니다. 
+<br>
+ - styled-components와 ReactJs는 이미 알고 있지만 좀 더 적응을 하기 위해 사용했습니다.
+
+<br>
+<br>
 
 # 사용자
 
