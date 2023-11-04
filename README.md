@@ -19,8 +19,7 @@ npm start
 <div align="middle">
 
 
-
-![image.png](https://hackmd.io/_uploads/ByAkwtm7p.png)
+![](shoppingMall_mainpage.gif)
     
 
 
